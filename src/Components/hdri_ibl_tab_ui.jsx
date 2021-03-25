@@ -5,6 +5,10 @@ export class HDRI_IBL_UI extends React.Component {
         super(props);
 
         this.state = {
+            ImageStringValue: this.props.ImageStringValue,
+            ImageValue: this.props.ImageValue,
+            ImageRotationValue: this.props.ImageRotationValue,
+            ImageExposureValue: this.props.ImageExposureValue,
 
         }
     }

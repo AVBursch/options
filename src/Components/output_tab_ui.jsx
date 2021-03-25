@@ -5,6 +5,18 @@ export class Output_Tab_UI extends React.Component {
         super(props);
 
         this.state = {
+            ViewportValue: this.props.ViewportValue,
+            FixedValue: this.props.FixedValue,
+            PanoramaValue: this.props.PanoramaValue,
+            SizeValue: this.props.SizeValue,
+            SizeWidthValue: this.props.SizeWidthValue,
+            SizeHeightValue: this.props.SizeHeightValue,
+            ImageFormatPngValue: this.props.ImageFormatPngValue,
+            ImageFormatJpgValue: this.props.ImageFormatJpgValue,
+            ImageFormatHDRValue: this.props.ImageFormatHDRValue,
+            ImageSaveModelValue: this.props.ImageSaveModelValue,
+            ImageSaveModelCustomValue: this.props.ImageSaveModelCustomValue,
+            ImageSaveLocationValue: this.props.ImageSaveLocationValue,
 
         }
     }

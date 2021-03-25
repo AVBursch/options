@@ -5,6 +5,16 @@ export class Environment_Tab_UI extends React.Component {
         super(props);
 
         this.state = {
+            BackgroundValue: this.props.BackgroundValue,
+            IntensityValue: this.props.IntensityValue,
+            ExposureValue: this.props.ExposureValue,
+            RenderingModeValue: this.props.RenderingModeValue,
+            SoftOmniLightsOptionValue: this.props.SoftOmniLightsOptionValue,
+            CausticsOptionValue: this.props.CausticsOptionValue,
+            ClayOptionValue: this.props.ClayOptionValue,
+            InformationBarOptionValue: this.props.InformationBarOptionValue,
+            TranslucentColorOptionValue: this.props.TranslucentColorOptionValue,
+            AutomaticMaterialsOptionValue: this.props.AutomaticMaterialsOptionValue,
 
         }
     }
