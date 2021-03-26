@@ -90,7 +90,21 @@ export class Rendering_Options_UI extends React.Component {
                     ImageFormatHDRValue={this.state.ImageFormatHDRValue}
                     ImageSaveModelValue={this.state.ImageSaveModelValue}
                     ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
-                    ImageSaveLocationValue={this.state.ImageSaveLocationValue} />
+                    ImageSaveLocationValue={this.state.ImageSaveLocationValue}
+
+                    handleUpdateViewportValue={this.handleUpdateViewportValue}
+                    handleUpdateFixedValue={this.handleUpdateFixedValue}
+                    handleUpdatePanoramaValue={this.handleUpdatePanoramaValue}
+                    handleUpdateSizeValue={this.handleUpdateSizeValue}
+                    handleUpdateSizeWidthValue={this.handleUpdateSizeWidthValue}
+                    handleUpdateSizeHeightValue={this.handleUpdateSizeHeightValue}
+                    handleUpdateImageFormatPngValue={this.handleUpdateImageFormatPngValue}
+                    handleUpdateImageFormatJpgValue={this.handleUpdateImageFormatPngValue}
+                    handleUpdateImageFormatHDRValue={this.handleUpdateImageFormatHDRValue}
+                    handleUpdateImageSaveModelValue={this.handleUpdateImageSaveModelValue}
+                    handleUpdateSaveModelCustomValue={this.handleUpdateSaveModelCustomValue}
+                    handleUpdateSaveLocationValue={this.handleUpdateSaveLocationValue}
+                />
 
                 <Environment_Tab_UI
                     BackgroundValue={this.state.BackgroundValue}
@@ -102,13 +116,31 @@ export class Rendering_Options_UI extends React.Component {
                     ClayOptionValue={this.state.ClayOptionValue}
                     InformationBarOptionValue={this.state.InformationBarOptionValue}
                     TranslucentColorOptionValue={this.state.TranslucentColorOptionValue}
-                    AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue} />
+                    AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue}
+
+                    handleUpdateBackgroundValue={this.handleUpdateBackgroundValue}
+                    handleUpdateIntensityValue={this.handleUpdateIntensityValue}
+                    handleUpdateExposureValue={this.handleUpdateExposureValue}
+                    handleUpdateRenderingModeValue={this.handleUpdateRenderingModeValue}
+                    handleUpdateSoftOmniLightsOptionValue={this.handleUpdateSoftOmniLightsOptionValue}
+                    handleUpdateCausticsOptionValue={this.handleUpdateCausticsOptionValue}
+                    handleUpdateClayOptionValue={this.handleUpdateClayOptionValue}
+                    handleUpdateInformationBarOptionValue={this.handleUpdateInformationBarOptionValue}
+                    handleUpdateTranslucentColorOptionValue={this.handleUpdateTranslucentColorOptionValue}
+                    handleUpdateAutomaticMaterialsOptionValue={this.handleUpdateAutomaticMaterialsOptionValue}
+                />
 
                 <HDRI_IBL_Tab_UI
                     ImageStringValue={this.state.ImageStringValue}
                     ImageValue={this.state.ImageValue}
                     ImageRotationValue={this.state.ImageRotationValue}
-                    ImageExposureValue={this.state.ImageExposureValue} />
+                    ImageExposureValue={this.state.ImageExposureValue}
+
+                    handleUpdateImageStringValue={this.handleUpdateImageStringValue}
+                    handleUpdateImageValue={this.handleUpdateImageValue}
+                    handleUpdateImageRotationValue={this.handleUpdateImageRotationValue}
+                    handleUpdateImageExposureValue={this.handleUpdateImageExposureValue}
+                />
 
 
                 <br />
