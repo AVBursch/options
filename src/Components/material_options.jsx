@@ -74,74 +74,77 @@ export class Rendering_Options_UI extends React.Component {
                     </tbody>
                 </table>
 
-                <button>Output</button>
-                <button>Environment</button>
-                <button>HDRI/IBL</button>
+                <button onClick={() => { this.handleOutputTabButtonClick() }}>Output</button>
+                <button onClick={() => { this.handleEnvironmentTabButtonClick() }}>Environment</button>
+                <button onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
 
-                <Output_Tab_UI
-                    ViewportValue={this.state.ViewportValue}
-                    FixedValue={this.state.FixedValue}
-                    PanoramaValue={this.state.PanoramaValue}
-                    SizeValue={this.state.SizeValue}
-                    SizeWidthValue={this.state.SizeWidthValue}
-                    SizeHeightValue={this.state.SizeHeightValue}
-                    ImageFormatPngValue={this.state.ImageFormatPngValue}
-                    ImageFormatJpgValue={this.state.ImageFormatJpgValue}
-                    ImageFormatHDRValue={this.state.ImageFormatHDRValue}
-                    ImageSaveModelValue={this.state.ImageSaveModelValue}
-                    ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
-                    ImageSaveLocationValue={this.state.ImageSaveLocationValue}
+                {this.state.TabOptionSelected === 1 ?
+                    <Output_Tab_UI
+                        ViewportValue={this.state.ViewportValue}
+                        FixedValue={this.state.FixedValue}
+                        PanoramaValue={this.state.PanoramaValue}
+                        SizeValue={this.state.SizeValue}
+                        SizeWidthValue={this.state.SizeWidthValue}
+                        SizeHeightValue={this.state.SizeHeightValue}
+                        ImageFormatPngValue={this.state.ImageFormatPngValue}
+                        ImageFormatJpgValue={this.state.ImageFormatJpgValue}
+                        ImageFormatHDRValue={this.state.ImageFormatHDRValue}
+                        ImageSaveModelValue={this.state.ImageSaveModelValue}
+                        ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
+                        ImageSaveLocationValue={this.state.ImageSaveLocationValue}
 
-                    handleUpdateViewportValue={this.handleUpdateViewportValue}
-                    handleUpdateFixedValue={this.handleUpdateFixedValue}
-                    handleUpdatePanoramaValue={this.handleUpdatePanoramaValue}
-                    handleUpdateSizeValue={this.handleUpdateSizeValue}
-                    handleUpdateSizeWidthValue={this.handleUpdateSizeWidthValue}
-                    handleUpdateSizeHeightValue={this.handleUpdateSizeHeightValue}
-                    handleUpdateImageFormatPngValue={this.handleUpdateImageFormatPngValue}
-                    handleUpdateImageFormatJpgValue={this.handleUpdateImageFormatPngValue}
-                    handleUpdateImageFormatHDRValue={this.handleUpdateImageFormatHDRValue}
-                    handleUpdateImageSaveModelValue={this.handleUpdateImageSaveModelValue}
-                    handleUpdateSaveModelCustomValue={this.handleUpdateSaveModelCustomValue}
-                    handleUpdateSaveLocationValue={this.handleUpdateSaveLocationValue}
-                />
+                        handleUpdateViewportValue={this.handleUpdateViewportValue}
+                        handleUpdateFixedValue={this.handleUpdateFixedValue}
+                        handleUpdatePanoramaValue={this.handleUpdatePanoramaValue}
+                        handleUpdateSizeValue={this.handleUpdateSizeValue}
+                        handleUpdateSizeWidthValue={this.handleUpdateSizeWidthValue}
+                        handleUpdateSizeHeightValue={this.handleUpdateSizeHeightValue}
+                        handleUpdateImageFormatPngValue={this.handleUpdateImageFormatPngValue}
+                        handleUpdateImageFormatJpgValue={this.handleUpdateImageFormatPngValue}
+                        handleUpdateImageFormatHDRValue={this.handleUpdateImageFormatHDRValue}
+                        handleUpdateImageSaveModelValue={this.handleUpdateImageSaveModelValue}
+                        handleUpdateSaveModelCustomValue={this.handleUpdateSaveModelCustomValue}
+                        handleUpdateSaveLocationValue={this.handleUpdateSaveLocationValue}
+                    />
+                    : null}
+                {this.state.TabOptionSelected === 2 ?
+                    <Environment_Tab_UI
+                        BackgroundValue={this.state.BackgroundValue}
+                        IntensityValue={this.state.IntensityValue}
+                        ExposureValue={this.state.ExposureValue}
+                        RenderingModeValue={this.state.RenderingModeValue}
+                        SoftOmniLightsOptionValue={this.state.SoftOmniLightsOptionValue}
+                        CausticsOptionValue={this.state.CausticsOptionValue}
+                        ClayOptionValue={this.state.ClayOptionValue}
+                        InformationBarOptionValue={this.state.InformationBarOptionValue}
+                        TranslucentColorOptionValue={this.state.TranslucentColorOptionValue}
+                        AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue}
 
-                <Environment_Tab_UI
-                    BackgroundValue={this.state.BackgroundValue}
-                    IntensityValue={this.state.IntensityValue}
-                    ExposureValue={this.state.ExposureValue}
-                    RenderingModeValue={this.state.RenderingModeValue}
-                    SoftOmniLightsOptionValue={this.state.SoftOmniLightsOptionValue}
-                    CausticsOptionValue={this.state.CausticsOptionValue}
-                    ClayOptionValue={this.state.ClayOptionValue}
-                    InformationBarOptionValue={this.state.InformationBarOptionValue}
-                    TranslucentColorOptionValue={this.state.TranslucentColorOptionValue}
-                    AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue}
+                        handleUpdateBackgroundValue={this.handleUpdateBackgroundValue}
+                        handleUpdateIntensityValue={this.handleUpdateIntensityValue}
+                        handleUpdateExposureValue={this.handleUpdateExposureValue}
+                        handleUpdateRenderingModeValue={this.handleUpdateRenderingModeValue}
+                        handleUpdateSoftOmniLightsOptionValue={this.handleUpdateSoftOmniLightsOptionValue}
+                        handleUpdateCausticsOptionValue={this.handleUpdateCausticsOptionValue}
+                        handleUpdateClayOptionValue={this.handleUpdateClayOptionValue}
+                        handleUpdateInformationBarOptionValue={this.handleUpdateInformationBarOptionValue}
+                        handleUpdateTranslucentColorOptionValue={this.handleUpdateTranslucentColorOptionValue}
+                        handleUpdateAutomaticMaterialsOptionValue={this.handleUpdateAutomaticMaterialsOptionValue}
+                    />
+                    : null}
+                {this.state.TabOptionSelected === 3 ?
+                    <HDRI_IBL_Tab_UI
+                        ImageStringValue={this.state.ImageStringValue}
+                        ImageValue={this.state.ImageValue}
+                        ImageRotationValue={this.state.ImageRotationValue}
+                        ImageExposureValue={this.state.ImageExposureValue}
 
-                    handleUpdateBackgroundValue={this.handleUpdateBackgroundValue}
-                    handleUpdateIntensityValue={this.handleUpdateIntensityValue}
-                    handleUpdateExposureValue={this.handleUpdateExposureValue}
-                    handleUpdateRenderingModeValue={this.handleUpdateRenderingModeValue}
-                    handleUpdateSoftOmniLightsOptionValue={this.handleUpdateSoftOmniLightsOptionValue}
-                    handleUpdateCausticsOptionValue={this.handleUpdateCausticsOptionValue}
-                    handleUpdateClayOptionValue={this.handleUpdateClayOptionValue}
-                    handleUpdateInformationBarOptionValue={this.handleUpdateInformationBarOptionValue}
-                    handleUpdateTranslucentColorOptionValue={this.handleUpdateTranslucentColorOptionValue}
-                    handleUpdateAutomaticMaterialsOptionValue={this.handleUpdateAutomaticMaterialsOptionValue}
-                />
-
-                <HDRI_IBL_Tab_UI
-                    ImageStringValue={this.state.ImageStringValue}
-                    ImageValue={this.state.ImageValue}
-                    ImageRotationValue={this.state.ImageRotationValue}
-                    ImageExposureValue={this.state.ImageExposureValue}
-
-                    handleUpdateImageStringValue={this.handleUpdateImageStringValue}
-                    handleUpdateImageValue={this.handleUpdateImageValue}
-                    handleUpdateImageRotationValue={this.handleUpdateImageRotationValue}
-                    handleUpdateImageExposureValue={this.handleUpdateImageExposureValue}
-                />
-
+                        handleUpdateImageStringValue={this.handleUpdateImageStringValue}
+                        handleUpdateImageValue={this.handleUpdateImageValue}
+                        handleUpdateImageRotationValue={this.handleUpdateImageRotationValue}
+                        handleUpdateImageExposureValue={this.handleUpdateImageExposureValue}
+                    />
+                    : null}
 
                 <br />
                 <button>Save</button>
@@ -155,6 +158,19 @@ export class Rendering_Options_UI extends React.Component {
 
 
     // class event functions
+
+    // Tab event functions
+    handleOutputTabButtonClick = () => {
+        this.setState({ TabOptionSelected: 1 });
+    }
+
+    handleEnvironmentTabButtonClick = () => {
+        this.setState({ TabOptionSelected: 2 });
+    }
+
+    handleHDRIIBLTabButtonClick = () => {
+        this.setState({ TabOptionSelected: 3 });
+    }
 
     // Output Tab
     handleUpdateViewportValue = (value) => {

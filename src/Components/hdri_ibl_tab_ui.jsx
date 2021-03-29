@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class HDRI_IBL_UI extends React.Component {
+export class HDRI_IBL_Tab_UI extends React.Component {
     constructor(props) {
         super(props);
 
