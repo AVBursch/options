@@ -24,7 +24,7 @@ export class Output_Tab_UI extends React.Component {
             ImageSaveLocationRadioValue: "model",
         }
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleImageSizeChange = this.handleImageSizeChange.bind(this);
         this.handleImageFormatChange = this.handleImageFormatChange.bind(this);
         this.handleImageSaveLocationChange = this.handleImageSaveLocationChange.bind(this);
     }
@@ -40,11 +40,11 @@ export class Output_Tab_UI extends React.Component {
 
                             <td>
                                 <form >
-                                    <input type="radio" value="viewport" checked={this.state.ImageSizeRadioValue === "viewport"} onChange={this.handleChange} />
+                                    <input type="radio" value="viewport" checked={this.state.ImageSizeRadioValue === "viewport"} onChange={this.handleImageSizeChange} />
                                     <label for="viewport">Viewport</label><br />
-                                    <input type="radio" value="fixed" checked={this.state.ImageSizeRadioValue === "fixed"} onChange={this.handleChange} />
+                                    <input type="radio" value="fixed" checked={this.state.ImageSizeRadioValue === "fixed"} onChange={this.handleImageSizeChange} />
                                     <label for="fixed">Fixed</label><br />
-                                    <input type="radio" value="panorama" checked={this.state.ImageSizeRadioValue === "panorama"} onChange={this.handleChange} />
+                                    <input type="radio" value="panorama" checked={this.state.ImageSizeRadioValue === "panorama"} onChange={this.handleImageSizeChange} />
                                     <label for="panorama">Panorama</label><br />
                                 </form>
 
@@ -143,7 +143,7 @@ export class Output_Tab_UI extends React.Component {
         )
     }
 
-    handleChange(event) {
+    handleImageSizeChange(event) {
         this.setState({
             ImageSizeRadioValue: event.target.value
         });

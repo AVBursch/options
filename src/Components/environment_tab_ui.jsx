@@ -16,7 +16,13 @@ export class Environment_Tab_UI extends React.Component {
             TranslucentColorOptionValue: this.props.TranslucentColorOptionValue,
             AutomaticMaterialsOptionValue: this.props.AutomaticMaterialsOptionValue,
 
+            defaultIntensityValue: 50,
+            defaultExposureValue: 50,
+
         }
+
+        this.IntensityValueNumber = React.createRef();
+        this.ExposureValueNumber = React.createRef();
     }
 
     render() {
@@ -34,19 +40,42 @@ export class Environment_Tab_UI extends React.Component {
                                 <option>Podium Physical Sky 2</option>
                                 <option>HDRI/IBL</option>
                             </select>
+
                             <h4>Sun / Sky Brightness:</h4>
                             <label for="intensity">Intensity:</label>
-                            <input type="range" name="intensity" min="0" max="100" />
+                            <input type="range" name="intensity" min={0} max={100} step={1}
+                                ref={this.IntensityValueNumber}
+                                defaultValue={this.props.defaultIntensityValue}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        IntensityValue: +value
+                                    }, () => {
+                                        this.IntensityValueNumber.current.value = +this.state.IntensityValue;
+                                        this.props.handleUpdateIntensityValue(+this.state.IntensityValue);
+                                    })
+                                }} />
+                            <label>{this.state.IntensityValue}</label>
                             <br></br>
                             <label for="exposure">Exposure:</label>
-                            <input type="range" name="exposure" min="0" max="100" />
+                            <input type="range" name="exposure" min={0} max={100} step={1}
+                                ref={this.ExposureValueNumber}
+                                defaultValue={this.props.defaultExposureValue}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        ExposureValue: +value
+                                    }, () => {
+                                        this.ExposureValueNumber.current.value = +this.state.ExposureValue;
+                                        this.props.handleUpdateExposureValue(+this.state.ExposureValue);
+                                    })
+                                }}
+                            />
+                            <label>{this.state.ExposureValue}</label>
                             <br></br>
-                            <button>Reset</button>
-
-
+                            <button onClick={() => { this.handleResetButtonClick() }}>Reset</button>
                         </td>
                         <td>
-
                             <h4>Rendering Mode:</h4>
                             <select>
                                 <option>Slow</option>
@@ -65,13 +94,19 @@ export class Environment_Tab_UI extends React.Component {
                             <label for="transparent"> Translucent Color</label><br />
                             <input type="checkbox" name="imageformat" value="automaticmaterials" />
                             <label for="transparent"> Automatic Materials</label><br />
-
-
                         </td>
                     </tr>
                 </table>
 
             </React.Fragment>
         )
+    }
+
+    handleResetButtonClick = () => {
+        this.setState({ IntensityValue: this.state.defaultIntensityValue, ExposureValue: this.state.defaultExposureValue },
+            () => {
+                this.IntensityValueNumber.current.value = +this.state.defaultIntensityValue;
+                this.ExposureValueNumber.current.value = +this.state.defaultExposureValue;
+            });
     }
 }
