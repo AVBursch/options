@@ -26,7 +26,7 @@ class App extends React.Component {
       BackgroundValue: "Default (Set in Sketchup)",
       IntensityValue: 50,
       ExposureValue: 50,
-      RenderingModeValue: "Fast",
+      RenderingModeValue: "Slow",
       SoftOmniLightsOptionValue: false,
       CausticsOptionValue: false,
       ClayOptionValue: false,
