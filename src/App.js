@@ -38,7 +38,7 @@ class App extends React.Component {
       ImageStringValue: "Interior01.hdr",
       ImageValue: "",
       ImageRotationValue: 0,
-      ImageExposureValue: 0
+      ImageExposureValue: 1.5
 
     }
   }

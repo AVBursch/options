@@ -35,17 +35,17 @@ export class Environment_Tab_UI extends React.Component {
                         <td>
                             <h4>Background:</h4>
                             <select>
-                                <option>Default (Set in Sketchup)</option>
-                                <option>Podium Physical Sky 1</option>
-                                <option>Podium Physical Sky 2</option>
-                                <option>HDRI/IBL</option>
+                                <option value={"Default (Set in Sketchup)"}>Default (Set in Sketchup)</option>
+                                <option value={"Podium Physical Sky 1"}>Podium Physical Sky 1</option>
+                                <option value={"Podium Physical Sky 2"}>Podium Physical Sky 2</option>
+                                <option value={"HDRI/IBL"}>HDRI/IBL</option>
                             </select>
 
                             <h4>Sun / Sky Brightness:</h4>
                             <label for="intensity">Intensity:</label>
                             <input type="range" name="intensity" min={0} max={100} step={1}
                                 ref={this.IntensityValueNumber}
-                                defaultValue={this.props.defaultIntensityValue}
+                                defaultValue={this.state.defaultIntensityValue}
                                 onChange={(e) => {
                                     const value = e.target.value;
                                     this.setState({
@@ -60,7 +60,7 @@ export class Environment_Tab_UI extends React.Component {
                             <label for="exposure">Exposure:</label>
                             <input type="range" name="exposure" min={0} max={100} step={1}
                                 ref={this.ExposureValueNumber}
-                                defaultValue={this.props.defaultExposureValue}
+                                defaultValue={this.state.defaultExposureValue}
                                 onChange={(e) => {
                                     const value = e.target.value;
                                     this.setState({
@@ -77,9 +77,17 @@ export class Environment_Tab_UI extends React.Component {
                         </td>
                         <td>
                             <h4>Rendering Mode:</h4>
-                            <select>
-                                <option>Slow</option>
-                                <option>Fast</option>
+                            <select defaultValue={"Slow"}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        RenderingModeValue: value
+                                    }, () => {
+                                        this.handleUpdateRenderingModeValue(this.state.RenderingModeValue);
+                                    });
+                                }}>
+                                <option value={"Slow"}>Slow</option>
+                                <option value={"Fast"}>Fast</option>
                             </select>
                             <br></br>
                             <input type="checkbox" name="imageformat" value="softomnilights" />

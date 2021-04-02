@@ -54,17 +54,25 @@ export class Output_Tab_UI extends React.Component {
                                         <tbody>
                                             <tr>
                                                 <td><label>Size:</label></td>
-                                                <td><select>
-                                                    <option>Custom</option>
-                                                    <option>230 x 150</option>
-                                                    <option>640 x 480</option>
-                                                    <option>1024 x 768</option>
-                                                    <option>2048 x 1536</option>
-                                                    <option>3076 x 2034</option>
-                                                    <option>4076 x 3304</option>
-                                                    <option>852 x 480</option>
-                                                    <option>1600 x 900</option>
-                                                    <option>1920 x 1080</option>
+                                                <td><select defaultValue={"Custom"}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        this.setState({
+                                                            Size: value
+                                                        }, () => {
+                                                            this.handleUpdateSizeValue(this.state.SizeValue);
+                                                        });
+                                                    }}>
+                                                    <option value={"Custom"}>Custom</option>
+                                                    <option value={"230 x 150"}>230 x 150</option>
+                                                    <option value={"640 x 480"}>640 x 480</option>
+                                                    <option value={"1024 x 768"}>1024 x 768</option>
+                                                    <option value={"2048 x 1536"}>2048 x 1536</option>
+                                                    <option value={"3076 x 2034"}>3076 x 2034</option>
+                                                    <option value={"4076 x 3304"}>4076 x 3304</option>
+                                                    <option value={"852 x 480"}>852 x 480</option>
+                                                    <option value={"1600 x 900"}>1600 x 900</option>
+                                                    <option value={"1920 x 1080"}>1920 x 1080</option>
                                                 </select></td>
                                             </tr>
                                         </tbody>
@@ -75,17 +83,25 @@ export class Output_Tab_UI extends React.Component {
                                         <tbody>
                                             <tr>
                                                 <td><label>Size:</label></td>
-                                                <td><select disabled={true}>
-                                                    <option>Custom</option>
-                                                    <option>230 x 150</option>
-                                                    <option>640 x 480</option>
-                                                    <option>1024 x 768</option>
-                                                    <option>2048 x 1536</option>
-                                                    <option>3076 x 2034</option>
-                                                    <option>4076 x 3304</option>
-                                                    <option>852 x 480</option>
-                                                    <option>1600 x 900</option>
-                                                    <option>1920 x 1080</option>
+                                                <td><select disabled={true} defaultValue={"Custom"}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        this.setState({
+                                                            Size: value
+                                                        }, () => {
+                                                            this.handleUpdateSizeValue(this.state.SizeValue);
+                                                        });
+                                                    }}>
+                                                    <option value={"Custom"}>Custom</option>
+                                                    <option value={"230 x 150"}>230 x 150</option>
+                                                    <option value={"640 x 480"}>640 x 480</option>
+                                                    <option value={"1024 x 768"}>1024 x 768</option>
+                                                    <option value={"2048 x 1536"}>2048 x 1536</option>
+                                                    <option value={"3076 x 2034"}>3076 x 2034</option>
+                                                    <option value={"4076 x 3304"}>4076 x 3304</option>
+                                                    <option value={"852 x 480"}>852 x 480</option>
+                                                    <option value={"1600 x 900"}>1600 x 900</option>
+                                                    <option value={"1920 x 1080"}>1920 x 1080</option>
                                                 </select></td>
                                             </tr>
                                         </tbody>

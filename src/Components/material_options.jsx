@@ -55,20 +55,29 @@ export class Rendering_Options_UI extends React.Component {
                     <tbody>
                         <tr>
                             <td><h4>Preset Name:</h4></td>
-                            <td><select>
-                                <option>1_exterior_default_2.0.pps</option>
-                                <option>1_exterior_fine_AA_2.0.pps</option>
-                                <option>1_exterior_high_2.0.pps</option>
-                                <option>1_exterior_QMC_2.0.pps</option>
-                                <option>2_interior_bright_default_2.1.pps</option>
-                                <option>2_interior_bright_fine_AA_2.1.pps</option>
-                                <option>2_interior_bright_high_2.1.pps</option>
-                                <option>2_interior_bright_QMC_2.1.pps</option>
-                                <option>3_interior_default_1.0.5.pps</option>
-                                <option>3_interior_fine_AA_1.0.5.pps</option>
-                                <option>3_interior_high_1.0.8.pps</option>
-                                <option>3_interior_QMC_1.0.3.pps</option>
-                                <option>default.pps</option>
+                            <td><select defaultValue={"default.pps"}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        PresetName: value
+                                    }, () => {
+                                        this.handleUpdatePresetValue(this.state.PresetNameValue);
+                                    });
+                                }}
+                            >
+                                <option value={"1_exterior_default_2.0.pps"}>1_exterior_default_2.0.pps</option>
+                                <option value={"1_exterior_fine_AA_2.0.pps"}>1_exterior_fine_AA_2.0.pps</option>
+                                <option value={"1_exterior_high_2.0.pps"}>1_exterior_high_2.0.pps</option>
+                                <option value={"1_exterior_QMC_2.0.pps"}>1_exterior_QMC_2.0.pps</option>
+                                <option value={"2_interior_bright_default_2.1.pps"}>2_interior_bright_default_2.1.pps</option>
+                                <option value={"2_interior_bright_fine_AA_2.1.pps"}>2_interior_bright_fine_AA_2.1.pps</option>
+                                <option value={"2_interior_bright_high_2.1.pps"}>2_interior_bright_high_2.1.pps</option>
+                                <option value={"2_interior_bright_QMC_2.1.pps"}>2_interior_bright_QMC_2.1.pps</option>
+                                <option value={"3_interior_default_1.0.5.pps"}>3_interior_default_1.0.5.pps</option>
+                                <option value={"3_interior_fine_AA_1.0.5.pps"}>3_interior_fine_AA_1.0.5.pps</option>
+                                <option value={"3_interior_high_1.0.8.pps"}>3_interior_high_1.0.8.pps</option>
+                                <option value={"3_interior_QMC_1.0.3.pps"}>3_interior_QMC_1.0.3.pps</option>
+                                <option value={"default.pps"}>default.pps</option>
                             </select></td>
                         </tr>
                     </tbody>
@@ -158,6 +167,9 @@ export class Rendering_Options_UI extends React.Component {
 
 
     // class event functions
+    handleUpdatePresetValue = (value) => {
+        this.setState({ PresetNameValue: value });
+    }
 
     // Tab event functions
     handleOutputTabButtonClick = () => {
