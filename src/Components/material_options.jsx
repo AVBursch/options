@@ -85,7 +85,12 @@ export class Rendering_Options_UI extends React.Component {
 
                 <button onClick={() => { this.handleOutputTabButtonClick() }}>Output</button>
                 <button onClick={() => { this.handleEnvironmentTabButtonClick() }}>Environment</button>
-                <button onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
+                {this.state.BackgroundValue === "HDRI/IBL" ?
+                    <button onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
+                    :
+                    <button disabled={true} onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
+                }
+
 
                 {this.state.TabOptionSelected === 1 ?
                     <Output_Tab_UI

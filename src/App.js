@@ -23,7 +23,7 @@ class App extends React.Component {
       ImageSaveLocationValue: "",
 
       // Environment tab
-      BackgroundValue: "HDRI/IBL",
+      BackgroundValue: "Default (Set in Sketchup)",
       IntensityValue: 50,
       ExposureValue: 50,
       RenderingModeValue: "Fast",

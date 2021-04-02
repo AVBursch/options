@@ -31,7 +31,7 @@ export class HDRI_IBL_Tab_UI extends React.Component {
                             this.setState({
                                 ImageStringValue: value
                             }, () => {
-                                this.handleUpdateImageStringValue(this.state.ImageStringValue);
+                                this.props.handleUpdateImageStringValue(this.state.ImageStringValue);
                             });
                         }}>
                         <option value={"Afternoon01.hdr"}>Afternoon01.hdr</option>

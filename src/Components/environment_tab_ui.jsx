@@ -34,7 +34,15 @@ export class Environment_Tab_UI extends React.Component {
                     <tr>
                         <td>
                             <h4>Background:</h4>
-                            <select>
+                            <select defaultValue={"Default (Set in Sketchup)"}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        BackgroundValue: value
+                                    }, () => {
+                                        this.props.handleUpdateBackgroundValue(this.state.BackgroundValue);
+                                    });
+                                }}>
                                 <option value={"Default (Set in Sketchup)"}>Default (Set in Sketchup)</option>
                                 <option value={"Podium Physical Sky 1"}>Podium Physical Sky 1</option>
                                 <option value={"Podium Physical Sky 2"}>Podium Physical Sky 2</option>
@@ -83,7 +91,7 @@ export class Environment_Tab_UI extends React.Component {
                                     this.setState({
                                         RenderingModeValue: value
                                     }, () => {
-                                        this.handleUpdateRenderingModeValue(this.state.RenderingModeValue);
+                                        this.props.handleUpdateRenderingModeValue(this.state.RenderingModeValue);
                                     });
                                 }}>
                                 <option value={"Slow"}>Slow</option>

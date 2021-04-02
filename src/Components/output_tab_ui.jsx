@@ -60,7 +60,7 @@ export class Output_Tab_UI extends React.Component {
                                                         this.setState({
                                                             Size: value
                                                         }, () => {
-                                                            this.handleUpdateSizeValue(this.state.SizeValue);
+                                                            this.props.handleUpdateSizeValue(this.state.SizeValue);
                                                         });
                                                     }}>
                                                     <option value={"Custom"}>Custom</option>
@@ -89,7 +89,7 @@ export class Output_Tab_UI extends React.Component {
                                                         this.setState({
                                                             Size: value
                                                         }, () => {
-                                                            this.handleUpdateSizeValue(this.state.SizeValue);
+                                                            this.props.handleUpdateSizeValue(this.state.SizeValue);
                                                         });
                                                     }}>
                                                     <option value={"Custom"}>Custom</option>
