@@ -98,17 +98,72 @@ export class Environment_Tab_UI extends React.Component {
                                 <option value={"Fast"}>Fast</option>
                             </select>
                             <br></br>
-                            <input type="checkbox" name="imageformat" value="softomnilights" />
+                            <input type="checkbox" name="imageformat" value="softomnilights"
+                                defaultValue={false}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        ImageFormatTransparentValue: value
+                                    }, () => {
+                                        this.props.handleUpdateImageFormatTransparentValue(this.state.ImageFormatTransparentValue);
+                                    });
+                                }} />
+
                             <label for="transparent"> Soft Omni Lights (Slower)</label><br />
-                            <input type="checkbox" name="imageformat" value="caustics" />
+                            <input type="checkbox"
+                                defaultValue={false}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        SoftOmniLightsOptionValue: value
+                                    }, () => {
+                                        this.props.handleUpdateSoftOmniLightsOptionValue(this.state.SoftOmniLightsOptionValue);
+                                    });
+                                }} />
                             <label for="transparent"> Caustics</label><br />
-                            <input type="checkbox" name="imageformat" value="clay" />
+                            <input type="checkbox"
+                                defaultValue={false}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        CausticsOptionValue: value
+                                    }, () => {
+                                        this.props.handleUpdateCausticsOptionValue(this.state.CausticsOptionValue);
+                                    });
+                                }} />
                             <label for="transparent"> Clay</label><br />
-                            <input type="checkbox" name="imageformat" value="informationbar" />
+                            <input type="checkbox"
+                                defaultValue={false}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        ClayOptionValue: value
+                                    }, () => {
+                                        this.props.handleUpdateClayOptionValue(this.state.ClayOptionValue);
+                                    });
+                                }} />
                             <label for="transparent"> Information Bar</label><br />
-                            <input type="checkbox" name="imageformat" value="Translucentcolor" />
+                            <input type="checkbox"
+                                defaultValue={false}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        InformationBarOptionValue: value
+                                    }, () => {
+                                        this.props.handleUpdateInformationBarOptionValue(this.state.InformationBarOptionValue);
+                                    });
+                                }} />
                             <label for="transparent"> Translucent Color</label><br />
-                            <input type="checkbox" name="imageformat" value="automaticmaterials" />
+                            <input type="checkbox"
+                                defaultValue={false}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.setState({
+                                        TranslucentColorOptionValue: value
+                                    }, () => {
+                                        this.props.handleUpdateTranslucentColorOptionValue(this.state.TranslucentColorOptionValue);
+                                    });
+                                }} />
                             <label for="transparent"> Automatic Materials</label><br />
                         </td>
                     </tr>

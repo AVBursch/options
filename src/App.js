@@ -18,6 +18,7 @@ class App extends React.Component {
       ImageFormatPngValue: true,
       ImageFormatJpgValue: false,
       ImageFormatHDRValue: false,
+      ImageFormatTransparentValue: false,
       ImageSaveModelValue: true,
       ImageSaveModelCustomValue: false,
       ImageSaveLocationValue: "",
@@ -55,6 +56,7 @@ class App extends React.Component {
           SizeHeightValue={this.state.SizeHeightValue}
           ImageFormatPngValueValue={this.state.ImageFormatPngValue}
           ImageFormatJpgValue={this.state.ImageFormatJpgValue}
+          ImageFormatTransparentValue={this.state.ImageFormatTransparentValue}
           ImageSaveModelValue={this.state.ImageSaveModelValue}
           ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
           ImageSaveLocationValue={this.state.ImageSaveLocationValue}

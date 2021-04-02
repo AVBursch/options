@@ -14,6 +14,7 @@ export class Output_Tab_UI extends React.Component {
             ImageFormatPngValue: this.props.ImageFormatPngValue,
             ImageFormatJpgValue: this.props.ImageFormatJpgValue,
             ImageFormatHDRValue: this.props.ImageFormatHDRValue,
+            ImageFormatTransparentValue: this.props.ImageFormatTransparentValue,
             ImageSaveModelValue: this.props.ImageSaveModelValue,
             ImageSaveModelCustomValue: this.props.ImageSaveModelCustomValue,
             ImageSaveLocationValue: this.props.ImageSaveLocationValue,
@@ -58,7 +59,7 @@ export class Output_Tab_UI extends React.Component {
                                                     onChange={(e) => {
                                                         const value = e.target.value;
                                                         this.setState({
-                                                            Size: value
+                                                            SizeValue: value
                                                         }, () => {
                                                             this.props.handleUpdateSizeValue(this.state.SizeValue);
                                                         });
@@ -87,7 +88,7 @@ export class Output_Tab_UI extends React.Component {
                                                     onChange={(e) => {
                                                         const value = e.target.value;
                                                         this.setState({
-                                                            Size: value
+                                                            SizeValue: value
                                                         }, () => {
                                                             this.props.handleUpdateSizeValue(this.state.SizeValue);
                                                         });
@@ -110,10 +111,34 @@ export class Output_Tab_UI extends React.Component {
 
 
                                 <label>Width:</label>
-                                {this.state.ImageSizeRadioValue === 'viewport' ? <input type="text" disabled={true} name="width" value="0" /> : <input type="text" name="width" value="0" />}
+                                {this.state.ImageSizeRadioValue === 'viewport'
+                                    ? <input type="text" disabled={true} name="width" value="0" />
+                                    : <input type="text"
+                                        defaultValue={1}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            this.setState({
+                                                SizeWidthValue: +value
+                                            }, () => {
+                                                this.props.handleUpdateSizeWidthValue(+this.state.SizeWidthValue);
+                                            });
+                                        }}
+                                    />}
                                 <br />
                                 <label>Height:</label>
-                                {this.state.ImageSizeRadioValue === 'viewport' ? <input type="text" disabled={true} name="height" value="0" /> : <input type="height" name="width" value="0" />}
+                                {this.state.ImageSizeRadioValue === 'viewport'
+                                    ? <input type="text" disabled={true} name="height" value="0" />
+                                    : <input type="height"
+                                        defaultValue={1}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            this.setState({
+                                                SizeHeightValue: +value
+                                            }, () => {
+                                                this.props.handleUpdateSizeHeightValue(+this.state.SizeHeightValue);
+                                            });
+                                        }}
+                                    />}
                             </td>
 
                             <td>
@@ -128,7 +153,16 @@ export class Output_Tab_UI extends React.Component {
                                     <label for="hdr">.hdr</label><br />
                                 </form>
 
-                                <input type="checkbox" name="imageformat" value="Transparent" />
+                                <input type="checkbox"
+                                    defaultValue={false}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        this.setState({
+                                            ImageFormatTransparentValue: value
+                                        }, () => {
+                                            this.props.handleUpdateImageFormatTransparentValue(this.state.ImageFormatTransparentValue);
+                                        });
+                                    }} />
                                 <label for="transparent"> Transparent</label><br />
 
                                 <h4>Image Save Location:</h4>
@@ -140,7 +174,16 @@ export class Output_Tab_UI extends React.Component {
                                 </form>
 
                                 {this.state.ImageSaveLocationRadioValue === "custom" ?
-                                    <input type="text" name="savelocation" value="save location" /> :
+                                    <input type="text"
+                                        defaultValue={""}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            this.setState({
+                                                ImageSaveLocationValue: value
+                                            }, () => {
+                                                this.props.handleUpdateSaveLocationValue(this.state.ImageSaveLocationValue);
+                                            });
+                                        }} /> :
                                     <input type="text" name="savelocation" disabled={true} value="save location" />
                                 }
                                 {this.state.ImageSaveLocationRadioValue === "custom" ?
@@ -163,17 +206,52 @@ export class Output_Tab_UI extends React.Component {
         this.setState({
             ImageSizeRadioValue: event.target.value
         });
+
+        if (this.state.ImageSizeRadioValue === "viewport") {
+            this.setState({ ViewportValue: true, FixedValue: false, PanoramaValue: false });
+            this.props.handleUpdateViewportValue(this.state.ViewportValue);
+        }
+        else if (this.state.ImageSizeRadioValue === "fixed") {
+            this.setState({ ViewportValue: false, FixedValue: true, PanoramaValue: false });
+            this.props.handleUpdateFixedValue(this.state.FixedValue);
+        }
+        else if (this.state.ImageSizeRadioValue === "panorama") {
+            this.setState({ ViewportValue: false, FixedValue: false, PanoramaValue: true });
+            this.props.handleUpdatePanoramaValue(this.state.PanoramaValue);
+        }
     }
 
     handleImageFormatChange(event) {
         this.setState({
             ImageFormatRadioValue: event.target.value
         });
+
+        if (this.state.ImageFormatRadioValue === "png") {
+            this.setState({ ImageFormatPngValue: true, ImageFormatJpgValue: false, ImageFormatHDRValue: false });
+            this.props.handleUpdateImageFormatPngValue(this.state.ImageFormatPngValue);
+        }
+        else if (this.state.ImageFormatRadioValue === "jpg") {
+            this.setState({ ImageFormatPngValue: false, ImageFormatJpgValue: true, ImageFormatHDRValue: false });
+            this.props.handleUpdateImageFormatJpgValue(this.state.ImageFormatJpgValue);
+        }
+        else if (this.state.ImageFormatRadioValue === "hdr") {
+            this.setState({ ImageFormatPngValue: false, ImageFormatJpgValue: false, ImageFormatHDRValue: true });
+            this.props.handleUpdateImageFormatHDRValue(this.state.ImageFormatHDRValue);
+        }
     }
 
     handleImageSaveLocationChange(event) {
         this.setState({
             ImageSaveLocationRadioValue: event.target.value
         });
+
+        if (this.state.ImageSaveLocationRadioValue === "model") {
+            this.setState({ ImageSaveModelValue: true, ImageSaveModelCustomValue: false });
+            this.props.handleUpdateImageSaveModelValue(this.state.ImageSaveModelValue);
+        }
+        else if (this.state.ImageSaveLocationRadioValue === "custom") {
+            this.setState({ ImageSaveModelValue: false, ImageSaveModelCustomValue: true });
+            this.props.handleUpdateSaveModelCustomValue(this.state.ImageSaveModelCustomValue);
+        }
     }
 }

@@ -18,6 +18,7 @@ export class Rendering_Options_UI extends React.Component {
             ImageFormatPngValue: this.props.ImageFormatPngValue,
             ImageFormatJpgValue: this.props.ImageFormatJpgValue,
             ImageFormatHDRValue: this.props.ImageFormatHDRValue,
+            ImageFormatTransparentValue: this.props.ImageFormatTransparentValue,
             ImageSaveModelValue: this.props.ImageSaveModelValue,
             ImageSaveModelCustomValue: this.props.ImageSaveModelCustomValue,
             ImageSaveLocationValue: this.props.ImageSaveLocationValue,
@@ -103,6 +104,7 @@ export class Rendering_Options_UI extends React.Component {
                         ImageFormatPngValue={this.state.ImageFormatPngValue}
                         ImageFormatJpgValue={this.state.ImageFormatJpgValue}
                         ImageFormatHDRValue={this.state.ImageFormatHDRValue}
+                        ImageFormatTransparentValue={this.state.ImageFormatTransparentValue}
                         ImageSaveModelValue={this.state.ImageSaveModelValue}
                         ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
                         ImageSaveLocationValue={this.state.ImageSaveLocationValue}
@@ -116,6 +118,7 @@ export class Rendering_Options_UI extends React.Component {
                         handleUpdateImageFormatPngValue={this.handleUpdateImageFormatPngValue}
                         handleUpdateImageFormatJpgValue={this.handleUpdateImageFormatPngValue}
                         handleUpdateImageFormatHDRValue={this.handleUpdateImageFormatHDRValue}
+                        handleUpdateImageFormatTransparentValue={this.handleUpdateImageFormatTransparentValue}
                         handleUpdateImageSaveModelValue={this.handleUpdateImageSaveModelValue}
                         handleUpdateSaveModelCustomValue={this.handleUpdateSaveModelCustomValue}
                         handleUpdateSaveLocationValue={this.handleUpdateSaveLocationValue}
@@ -241,6 +244,12 @@ export class Rendering_Options_UI extends React.Component {
     handleUpdateImageFormatHDRValue = (value) => {
         this.setState({
             ImageFormatHDRValue: value
+        });
+    }
+
+    handleUpdateImageFormatTransparentValue = (value) => {
+        this.setState({
+            ImageFormatTransparentValue: value
         });
     }
 
