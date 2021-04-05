@@ -164,8 +164,8 @@ export class Rendering_Options_UI extends React.Component {
                     : null}
 
                 <br />
-                <button>Save</button>
-                <button>Cancel</button>
+                <button onClick={() => { this.handleSaveButtonClick() }}>Save</button>
+                <button onClick={() => { this.handleCancelButtonClick() }}>Cancel</button>
 
             </React.Fragment>
         )
@@ -177,6 +177,14 @@ export class Rendering_Options_UI extends React.Component {
     // class event functions
     handleUpdatePresetValue = (value) => {
         this.setState({ PresetNameValue: value });
+    }
+
+    handleSaveButtonClick = () => {
+
+    }
+
+    handleCancelButtonClick = () => {
+
     }
 
     // Tab event functions

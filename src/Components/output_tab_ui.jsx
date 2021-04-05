@@ -210,14 +210,20 @@ export class Output_Tab_UI extends React.Component {
         if (this.state.ImageSizeRadioValue === "viewport") {
             this.setState({ ViewportValue: true, FixedValue: false, PanoramaValue: false });
             this.props.handleUpdateViewportValue(this.state.ViewportValue);
+            this.props.handleUpdateFixedValue(this.state.FixedValue);
+            this.props.handleUpdatePanoramaValue(this.state.PanoramaValue);
         }
         else if (this.state.ImageSizeRadioValue === "fixed") {
             this.setState({ ViewportValue: false, FixedValue: true, PanoramaValue: false });
             this.props.handleUpdateFixedValue(this.state.FixedValue);
+            this.props.handleUpdateViewportValue(this.state.ViewportValue);
+            this.props.handleUpdatePanoramaValue(this.state.PanoramaValue);
         }
         else if (this.state.ImageSizeRadioValue === "panorama") {
             this.setState({ ViewportValue: false, FixedValue: false, PanoramaValue: true });
             this.props.handleUpdatePanoramaValue(this.state.PanoramaValue);
+            this.props.handleUpdateViewportValue(this.state.ViewportValue);
+            this.props.handleUpdateFixedValue(this.state.FixedValue);
         }
     }
 
@@ -229,14 +235,20 @@ export class Output_Tab_UI extends React.Component {
         if (this.state.ImageFormatRadioValue === "png") {
             this.setState({ ImageFormatPngValue: true, ImageFormatJpgValue: false, ImageFormatHDRValue: false });
             this.props.handleUpdateImageFormatPngValue(this.state.ImageFormatPngValue);
+            this.props.handleUpdateImageFormatJpgValue(this.state.ImageFormatJpgValue);
+            this.props.handleUpdateImageFormatHDRValue(this.state.ImageFormatHDRValue);
         }
         else if (this.state.ImageFormatRadioValue === "jpg") {
             this.setState({ ImageFormatPngValue: false, ImageFormatJpgValue: true, ImageFormatHDRValue: false });
             this.props.handleUpdateImageFormatJpgValue(this.state.ImageFormatJpgValue);
+            this.props.handleUpdateImageFormatPngValue(this.state.ImageFormatPngValue);
+            this.props.handleUpdateImageFormatHDRValue(this.state.ImageFormatHDRValue);
         }
         else if (this.state.ImageFormatRadioValue === "hdr") {
             this.setState({ ImageFormatPngValue: false, ImageFormatJpgValue: false, ImageFormatHDRValue: true });
             this.props.handleUpdateImageFormatHDRValue(this.state.ImageFormatHDRValue);
+            this.props.handleUpdateImageFormatPngValue(this.state.ImageFormatPngValue);
+            this.props.handleUpdateImageFormatJpgValue(this.state.ImageFormatJpgValue);
         }
     }
 
@@ -248,10 +260,12 @@ export class Output_Tab_UI extends React.Component {
         if (this.state.ImageSaveLocationRadioValue === "model") {
             this.setState({ ImageSaveModelValue: true, ImageSaveModelCustomValue: false });
             this.props.handleUpdateImageSaveModelValue(this.state.ImageSaveModelValue);
+            this.props.handleUpdateSaveModelCustomValue(this.state.ImageSaveModelCustomValue);
         }
         else if (this.state.ImageSaveLocationRadioValue === "custom") {
             this.setState({ ImageSaveModelValue: false, ImageSaveModelCustomValue: true });
             this.props.handleUpdateSaveModelCustomValue(this.state.ImageSaveModelCustomValue);
+            this.props.handleUpdateImageSaveModelValue(this.state.ImageSaveModelValue);
         }
     }
 }
