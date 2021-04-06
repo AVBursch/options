@@ -12,7 +12,6 @@ export class HDRI_IBL_Tab_UI extends React.Component {
 
             defaultRotationValue: 0,
             defaultExposureValue: 1.5,
-
         }
 
         this.ImageRotationValueNumber = React.createRef();
@@ -42,7 +41,9 @@ export class HDRI_IBL_Tab_UI extends React.Component {
                         <option value={"Sunset02.hdr"}>Sunset02.hdr</option>
                     </select>
                     <br></br>
+
                     <div> {/*image goes here*/}</div>
+
                     <label for="rotation">Rotation:</label>
                     <input type="range" name="rotation" min={0} max={360} step={1}
                         ref={this.ImageRotationValueNumber}
@@ -58,6 +59,7 @@ export class HDRI_IBL_Tab_UI extends React.Component {
                         }}
                     />
                     <label>{this.state.ImageRotationValue}</label>
+
                     <label for="exposure">Exposure:</label>
                     <input type="range" name="exposure" min={0.0} max={3.0} step={0.1}
                         ref={this.ImageExposureValueNumber}
@@ -75,7 +77,6 @@ export class HDRI_IBL_Tab_UI extends React.Component {
                     <label>{this.state.ImageExposureValue}</label>
                     <br></br>
                 </div>
-
             </React.Fragment>
         )
     }
