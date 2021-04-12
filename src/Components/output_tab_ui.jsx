@@ -40,6 +40,7 @@ export class Output_Tab_UI extends React.Component {
                         <tr>
 
                             <td>
+                                <h4>Image Size:</h4>
                                 <form >
                                     <input type="radio" value="viewport" checked={this.state.ImageSizeRadioValue === "viewport"} onChange={this.handleImageSizeChange} />
                                     <label for="viewport">Viewport</label><br />
@@ -187,9 +188,9 @@ export class Output_Tab_UI extends React.Component {
                                     <input type="text" name="savelocation" disabled={true} value="save location" />
                                 }
                                 {this.state.ImageSaveLocationRadioValue === "custom" ?
-                                    <button>Browse</button>
+                                    <button onClick={() => { this.handleBrowseButtonClick() }}>Browse</button>
                                     :
-                                    <button disabled={true}>Browse</button>
+                                    <button disabled={true} >Browse</button>
                                 }
 
                             </td>
@@ -200,6 +201,14 @@ export class Output_Tab_UI extends React.Component {
 
             </React.Fragment>
         )
+    }
+
+    handleBrowseButtonClick = () => {
+
+    }
+
+    handleUpdateSaveLocationTextBox = () => {
+
     }
 
     handleImageSizeChange(event) {
