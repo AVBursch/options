@@ -50,123 +50,125 @@ export class Rendering_Options_UI extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                <table>
-                    <thead></thead>
-                    <tbody>
-                        <tr>
-                            <td><h4>Preset Name:</h4></td>
-                            <td><select defaultValue={"default.pps"}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    this.setState({
-                                        PresetName: value
-                                    }, () => {
-                                        this.handleUpdatePresetValue(this.state.PresetNameValue);
-                                    });
-                                }}
-                            >
-                                <option value={"1_exterior_default_2.0.pps"}>1_exterior_default_2.0.pps</option>
-                                <option value={"1_exterior_fine_AA_2.0.pps"}>1_exterior_fine_AA_2.0.pps</option>
-                                <option value={"1_exterior_high_2.0.pps"}>1_exterior_high_2.0.pps</option>
-                                <option value={"1_exterior_QMC_2.0.pps"}>1_exterior_QMC_2.0.pps</option>
-                                <option value={"2_interior_bright_default_2.1.pps"}>2_interior_bright_default_2.1.pps</option>
-                                <option value={"2_interior_bright_fine_AA_2.1.pps"}>2_interior_bright_fine_AA_2.1.pps</option>
-                                <option value={"2_interior_bright_high_2.1.pps"}>2_interior_bright_high_2.1.pps</option>
-                                <option value={"2_interior_bright_QMC_2.1.pps"}>2_interior_bright_QMC_2.1.pps</option>
-                                <option value={"3_interior_default_1.0.5.pps"}>3_interior_default_1.0.5.pps</option>
-                                <option value={"3_interior_fine_AA_1.0.5.pps"}>3_interior_fine_AA_1.0.5.pps</option>
-                                <option value={"3_interior_high_1.0.8.pps"}>3_interior_high_1.0.8.pps</option>
-                                <option value={"3_interior_QMC_1.0.3.pps"}>3_interior_QMC_1.0.3.pps</option>
-                                <option value={"default.pps"}>default.pps</option>
-                            </select></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <React.Fragment >
+                <div style={{ height: 480, width: 480, backgroundColor: '#FFF5EE' }}>
+                    <table>
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <td><h4>Preset Name:</h4></td>
+                                <td><select defaultValue={"default.pps"}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        this.setState({
+                                            PresetName: value
+                                        }, () => {
+                                            this.handleUpdatePresetValue(this.state.PresetNameValue);
+                                        });
+                                    }}
+                                >
+                                    <option value={"1_exterior_default_2.0.pps"}>1_exterior_default_2.0.pps</option>
+                                    <option value={"1_exterior_fine_AA_2.0.pps"}>1_exterior_fine_AA_2.0.pps</option>
+                                    <option value={"1_exterior_high_2.0.pps"}>1_exterior_high_2.0.pps</option>
+                                    <option value={"1_exterior_QMC_2.0.pps"}>1_exterior_QMC_2.0.pps</option>
+                                    <option value={"2_interior_bright_default_2.1.pps"}>2_interior_bright_default_2.1.pps</option>
+                                    <option value={"2_interior_bright_fine_AA_2.1.pps"}>2_interior_bright_fine_AA_2.1.pps</option>
+                                    <option value={"2_interior_bright_high_2.1.pps"}>2_interior_bright_high_2.1.pps</option>
+                                    <option value={"2_interior_bright_QMC_2.1.pps"}>2_interior_bright_QMC_2.1.pps</option>
+                                    <option value={"3_interior_default_1.0.5.pps"}>3_interior_default_1.0.5.pps</option>
+                                    <option value={"3_interior_fine_AA_1.0.5.pps"}>3_interior_fine_AA_1.0.5.pps</option>
+                                    <option value={"3_interior_high_1.0.8.pps"}>3_interior_high_1.0.8.pps</option>
+                                    <option value={"3_interior_QMC_1.0.3.pps"}>3_interior_QMC_1.0.3.pps</option>
+                                    <option value={"default.pps"}>default.pps</option>
+                                </select></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                <button onClick={() => { this.handleOutputTabButtonClick() }}>Output</button>
-                <button onClick={() => { this.handleEnvironmentTabButtonClick() }}>Environment</button>
-                {this.state.BackgroundValue === "HDRI/IBL" ?
-                    <button onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
-                    :
-                    <button disabled={true} onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
-                }
+                    <button onClick={() => { this.handleOutputTabButtonClick() }}>Output</button>
+                    <button onClick={() => { this.handleEnvironmentTabButtonClick() }}>Environment</button>
+                    {this.state.BackgroundValue === "HDRI/IBL" ?
+                        <button onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
+                        :
+                        <button disabled={true} onClick={() => { this.handleHDRIIBLTabButtonClick() }}>HDRI/IBL</button>
+                    }
 
 
-                {this.state.TabOptionSelected === 1 ?
-                    <Output_Tab_UI
-                        ViewportValue={this.state.ViewportValue}
-                        FixedValue={this.state.FixedValue}
-                        PanoramaValue={this.state.PanoramaValue}
-                        SizeValue={this.state.SizeValue}
-                        SizeWidthValue={this.state.SizeWidthValue}
-                        SizeHeightValue={this.state.SizeHeightValue}
-                        ImageFormatPngValue={this.state.ImageFormatPngValue}
-                        ImageFormatJpgValue={this.state.ImageFormatJpgValue}
-                        ImageFormatHDRValue={this.state.ImageFormatHDRValue}
-                        ImageFormatTransparentValue={this.state.ImageFormatTransparentValue}
-                        ImageSaveModelValue={this.state.ImageSaveModelValue}
-                        ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
-                        ImageSaveLocationValue={this.state.ImageSaveLocationValue}
+                    {this.state.TabOptionSelected === 1 ?
+                        <Output_Tab_UI
+                            ViewportValue={this.state.ViewportValue}
+                            FixedValue={this.state.FixedValue}
+                            PanoramaValue={this.state.PanoramaValue}
+                            SizeValue={this.state.SizeValue}
+                            SizeWidthValue={this.state.SizeWidthValue}
+                            SizeHeightValue={this.state.SizeHeightValue}
+                            ImageFormatPngValue={this.state.ImageFormatPngValue}
+                            ImageFormatJpgValue={this.state.ImageFormatJpgValue}
+                            ImageFormatHDRValue={this.state.ImageFormatHDRValue}
+                            ImageFormatTransparentValue={this.state.ImageFormatTransparentValue}
+                            ImageSaveModelValue={this.state.ImageSaveModelValue}
+                            ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
+                            ImageSaveLocationValue={this.state.ImageSaveLocationValue}
 
-                        handleUpdateViewportValue={this.handleUpdateViewportValue}
-                        handleUpdateFixedValue={this.handleUpdateFixedValue}
-                        handleUpdatePanoramaValue={this.handleUpdatePanoramaValue}
-                        handleUpdateSizeValue={this.handleUpdateSizeValue}
-                        handleUpdateSizeWidthValue={this.handleUpdateSizeWidthValue}
-                        handleUpdateSizeHeightValue={this.handleUpdateSizeHeightValue}
-                        handleUpdateImageFormatPngValue={this.handleUpdateImageFormatPngValue}
-                        handleUpdateImageFormatJpgValue={this.handleUpdateImageFormatPngValue}
-                        handleUpdateImageFormatHDRValue={this.handleUpdateImageFormatHDRValue}
-                        handleUpdateImageFormatTransparentValue={this.handleUpdateImageFormatTransparentValue}
-                        handleUpdateImageSaveModelValue={this.handleUpdateImageSaveModelValue}
-                        handleUpdateSaveModelCustomValue={this.handleUpdateSaveModelCustomValue}
-                        handleUpdateSaveLocationValue={this.handleUpdateSaveLocationValue}
-                    />
-                    : null}
-                {this.state.TabOptionSelected === 2 ?
-                    <Environment_Tab_UI
-                        BackgroundValue={this.state.BackgroundValue}
-                        IntensityValue={this.state.IntensityValue}
-                        ExposureValue={this.state.ExposureValue}
-                        RenderingModeValue={this.state.RenderingModeValue}
-                        SoftOmniLightsOptionValue={this.state.SoftOmniLightsOptionValue}
-                        CausticsOptionValue={this.state.CausticsOptionValue}
-                        ClayOptionValue={this.state.ClayOptionValue}
-                        InformationBarOptionValue={this.state.InformationBarOptionValue}
-                        TranslucentColorOptionValue={this.state.TranslucentColorOptionValue}
-                        AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue}
+                            handleUpdateViewportValue={this.handleUpdateViewportValue}
+                            handleUpdateFixedValue={this.handleUpdateFixedValue}
+                            handleUpdatePanoramaValue={this.handleUpdatePanoramaValue}
+                            handleUpdateSizeValue={this.handleUpdateSizeValue}
+                            handleUpdateSizeWidthValue={this.handleUpdateSizeWidthValue}
+                            handleUpdateSizeHeightValue={this.handleUpdateSizeHeightValue}
+                            handleUpdateImageFormatPngValue={this.handleUpdateImageFormatPngValue}
+                            handleUpdateImageFormatJpgValue={this.handleUpdateImageFormatPngValue}
+                            handleUpdateImageFormatHDRValue={this.handleUpdateImageFormatHDRValue}
+                            handleUpdateImageFormatTransparentValue={this.handleUpdateImageFormatTransparentValue}
+                            handleUpdateImageSaveModelValue={this.handleUpdateImageSaveModelValue}
+                            handleUpdateSaveModelCustomValue={this.handleUpdateSaveModelCustomValue}
+                            handleUpdateSaveLocationValue={this.handleUpdateSaveLocationValue}
+                        />
+                        : null}
+                    {this.state.TabOptionSelected === 2 ?
+                        <Environment_Tab_UI
+                            BackgroundValue={this.state.BackgroundValue}
+                            IntensityValue={this.state.IntensityValue}
+                            ExposureValue={this.state.ExposureValue}
+                            RenderingModeValue={this.state.RenderingModeValue}
+                            SoftOmniLightsOptionValue={this.state.SoftOmniLightsOptionValue}
+                            CausticsOptionValue={this.state.CausticsOptionValue}
+                            ClayOptionValue={this.state.ClayOptionValue}
+                            InformationBarOptionValue={this.state.InformationBarOptionValue}
+                            TranslucentColorOptionValue={this.state.TranslucentColorOptionValue}
+                            AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue}
 
-                        handleUpdateBackgroundValue={this.handleUpdateBackgroundValue}
-                        handleUpdateIntensityValue={this.handleUpdateIntensityValue}
-                        handleUpdateExposureValue={this.handleUpdateExposureValue}
-                        handleUpdateRenderingModeValue={this.handleUpdateRenderingModeValue}
-                        handleUpdateSoftOmniLightsOptionValue={this.handleUpdateSoftOmniLightsOptionValue}
-                        handleUpdateCausticsOptionValue={this.handleUpdateCausticsOptionValue}
-                        handleUpdateClayOptionValue={this.handleUpdateClayOptionValue}
-                        handleUpdateInformationBarOptionValue={this.handleUpdateInformationBarOptionValue}
-                        handleUpdateTranslucentColorOptionValue={this.handleUpdateTranslucentColorOptionValue}
-                        handleUpdateAutomaticMaterialsOptionValue={this.handleUpdateAutomaticMaterialsOptionValue}
-                    />
-                    : null}
-                {this.state.TabOptionSelected === 3 ?
-                    <HDRI_IBL_Tab_UI
-                        ImageStringValue={this.state.ImageStringValue}
-                        ImageValue={this.state.ImageValue}
-                        ImageRotationValue={this.state.ImageRotationValue}
-                        ImageExposureValue={this.state.ImageExposureValue}
+                            handleUpdateBackgroundValue={this.handleUpdateBackgroundValue}
+                            handleUpdateIntensityValue={this.handleUpdateIntensityValue}
+                            handleUpdateExposureValue={this.handleUpdateExposureValue}
+                            handleUpdateRenderingModeValue={this.handleUpdateRenderingModeValue}
+                            handleUpdateSoftOmniLightsOptionValue={this.handleUpdateSoftOmniLightsOptionValue}
+                            handleUpdateCausticsOptionValue={this.handleUpdateCausticsOptionValue}
+                            handleUpdateClayOptionValue={this.handleUpdateClayOptionValue}
+                            handleUpdateInformationBarOptionValue={this.handleUpdateInformationBarOptionValue}
+                            handleUpdateTranslucentColorOptionValue={this.handleUpdateTranslucentColorOptionValue}
+                            handleUpdateAutomaticMaterialsOptionValue={this.handleUpdateAutomaticMaterialsOptionValue}
+                        />
+                        : null}
+                    {this.state.TabOptionSelected === 3 ?
+                        <HDRI_IBL_Tab_UI
+                            ImageStringValue={this.state.ImageStringValue}
+                            ImageValue={this.state.ImageValue}
+                            ImageRotationValue={this.state.ImageRotationValue}
+                            ImageExposureValue={this.state.ImageExposureValue}
 
-                        handleUpdateImageStringValue={this.handleUpdateImageStringValue}
-                        handleUpdateImageValue={this.handleUpdateImageValue}
-                        handleUpdateImageRotationValue={this.handleUpdateImageRotationValue}
-                        handleUpdateImageExposureValue={this.handleUpdateImageExposureValue}
-                    />
-                    : null}
+                            handleUpdateImageStringValue={this.handleUpdateImageStringValue}
+                            handleUpdateImageValue={this.handleUpdateImageValue}
+                            handleUpdateImageRotationValue={this.handleUpdateImageRotationValue}
+                            handleUpdateImageExposureValue={this.handleUpdateImageExposureValue}
+                        />
+                        : null}
 
-                <br />
-                <button onClick={() => { this.handleSaveButtonClick() }}>Save</button>
-                <button onClick={() => { this.handleCancelButtonClick() }}>Cancel</button>
+                    <br />
+                    <button onClick={() => { this.handleSaveButtonClick() }}>Save</button>
+                    <button onClick={() => { this.handleCancelButtonClick() }}>Cancel</button>
 
+                </div>
             </React.Fragment>
         )
     }

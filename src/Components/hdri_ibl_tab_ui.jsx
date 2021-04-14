@@ -22,7 +22,7 @@ export class HDRI_IBL_Tab_UI extends React.Component {
         return (
             <React.Fragment>
 
-                <div>
+                <div style={{ height: 320, width: 480, backgroundColor: 'white' }}>
                     <h4>Texture:</h4>
                     <select defaultValue={"Afternoon01.hdr"}
                         onChange={(e) => {
@@ -42,7 +42,7 @@ export class HDRI_IBL_Tab_UI extends React.Component {
                     </select>
                     <br></br>
 
-                    <div> {/*image goes here*/}</div>
+                    <div style={{ height: 220, width: 480, backgroundColor: '#FFF5EE' }}> {/*image goes here*/}</div>
 
                     <label for="rotation">Rotation:</label>
                     <input type="range" name="rotation" min={0} max={360} step={1}
