@@ -38,160 +38,162 @@ export class Output_Tab_UI extends React.Component {
                         <thead></thead>
                         <tbody>
                             <tr>
-                                <td>
-                                    <h4>Image Size:</h4>
-                                    <form >
-                                        <input type="radio" value="viewport" checked={this.state.ImageSizeRadioValue === "viewport"} onChange={this.handleImageSizeChange} />
-                                        <label for="viewport">Viewport</label><br />
-                                        <input type="radio" value="fixed" checked={this.state.ImageSizeRadioValue === "fixed"} onChange={this.handleImageSizeChange} />
-                                        <label for="fixed">Fixed</label><br />
-                                        <input type="radio" value="panorama" checked={this.state.ImageSizeRadioValue === "panorama"} onChange={this.handleImageSizeChange} />
-                                        <label for="panorama">Panorama</label><br />
-                                    </form>
+                                <td style={{ height: 320, width: 240, backgroundColor: 'white' }}>
+                                    <div style={{ height: 320, width: 240, backgroundColor: 'white' }}>
+                                        <h4>Image Size:</h4>
+                                        <form >
+                                            <input type="radio" value="viewport" checked={this.state.ImageSizeRadioValue === "viewport"} onChange={this.handleImageSizeChange} />
+                                            <label for="viewport">Viewport</label><br />
+                                            <input type="radio" value="fixed" checked={this.state.ImageSizeRadioValue === "fixed"} onChange={this.handleImageSizeChange} />
+                                            <label for="fixed">Fixed</label><br />
+                                            <input type="radio" value="panorama" checked={this.state.ImageSizeRadioValue === "panorama"} onChange={this.handleImageSizeChange} />
+                                            <label for="panorama">Panorama</label><br />
+                                        </form>
 
-                                    {this.state.ImageSizeRadioValue === 'fixed' ?
-                                        <table>
-                                            <thead></thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><label>Size:</label></td>
-                                                    <td><select defaultValue={"Custom"}
-                                                        onChange={(e) => {
-                                                            const value = e.target.value;
-                                                            this.setState({
-                                                                SizeValue: value
-                                                            }, () => {
-                                                                this.props.handleUpdateSizeValue(this.state.SizeValue);
-                                                            });
-                                                        }}>
-                                                        <option value={"Custom"}>Custom</option>
-                                                        <option value={"230 x 150"}>230 x 150</option>
-                                                        <option value={"640 x 480"}>640 x 480</option>
-                                                        <option value={"1024 x 768"}>1024 x 768</option>
-                                                        <option value={"2048 x 1536"}>2048 x 1536</option>
-                                                        <option value={"3076 x 2034"}>3076 x 2034</option>
-                                                        <option value={"4076 x 3304"}>4076 x 3304</option>
-                                                        <option value={"852 x 480"}>852 x 480</option>
-                                                        <option value={"1600 x 900"}>1600 x 900</option>
-                                                        <option value={"1920 x 1080"}>1920 x 1080</option>
-                                                    </select></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        :
-                                        <table>
-                                            <thead></thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><label>Size:</label></td>
-                                                    <td><select disabled={true} defaultValue={"Custom"}
-                                                        onChange={(e) => {
-                                                            const value = e.target.value;
-                                                            this.setState({
-                                                                SizeValue: value
-                                                            }, () => {
-                                                                this.props.handleUpdateSizeValue(this.state.SizeValue);
-                                                            });
-                                                        }}>
-                                                        <option value={"Custom"}>Custom</option>
-                                                        <option value={"230 x 150"}>230 x 150</option>
-                                                        <option value={"640 x 480"}>640 x 480</option>
-                                                        <option value={"1024 x 768"}>1024 x 768</option>
-                                                        <option value={"2048 x 1536"}>2048 x 1536</option>
-                                                        <option value={"3076 x 2034"}>3076 x 2034</option>
-                                                        <option value={"4076 x 3304"}>4076 x 3304</option>
-                                                        <option value={"852 x 480"}>852 x 480</option>
-                                                        <option value={"1600 x 900"}>1600 x 900</option>
-                                                        <option value={"1920 x 1080"}>1920 x 1080</option>
-                                                    </select></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    }
+                                        {this.state.ImageSizeRadioValue === 'fixed' ?
+                                            <table>
+                                                <thead></thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><label>Size:</label></td>
+                                                        <td><select defaultValue={"Custom"}
+                                                            onChange={(e) => {
+                                                                const value = e.target.value;
+                                                                this.setState({
+                                                                    SizeValue: value
+                                                                }, () => {
+                                                                    this.props.handleUpdateSizeValue(this.state.SizeValue);
+                                                                });
+                                                            }}>
+                                                            <option value={"Custom"}>Custom</option>
+                                                            <option value={"230 x 150"}>230 x 150</option>
+                                                            <option value={"640 x 480"}>640 x 480</option>
+                                                            <option value={"1024 x 768"}>1024 x 768</option>
+                                                            <option value={"2048 x 1536"}>2048 x 1536</option>
+                                                            <option value={"3076 x 2034"}>3076 x 2034</option>
+                                                            <option value={"4076 x 3304"}>4076 x 3304</option>
+                                                            <option value={"852 x 480"}>852 x 480</option>
+                                                            <option value={"1600 x 900"}>1600 x 900</option>
+                                                            <option value={"1920 x 1080"}>1920 x 1080</option>
+                                                        </select></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            :
+                                            <table>
+                                                <thead></thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><label>Size:</label></td>
+                                                        <td><select disabled={true} defaultValue={"Custom"}
+                                                            onChange={(e) => {
+                                                                const value = e.target.value;
+                                                                this.setState({
+                                                                    SizeValue: value
+                                                                }, () => {
+                                                                    this.props.handleUpdateSizeValue(this.state.SizeValue);
+                                                                });
+                                                            }}>
+                                                            <option value={"Custom"}>Custom</option>
+                                                            <option value={"230 x 150"}>230 x 150</option>
+                                                            <option value={"640 x 480"}>640 x 480</option>
+                                                            <option value={"1024 x 768"}>1024 x 768</option>
+                                                            <option value={"2048 x 1536"}>2048 x 1536</option>
+                                                            <option value={"3076 x 2034"}>3076 x 2034</option>
+                                                            <option value={"4076 x 3304"}>4076 x 3304</option>
+                                                            <option value={"852 x 480"}>852 x 480</option>
+                                                            <option value={"1600 x 900"}>1600 x 900</option>
+                                                            <option value={"1920 x 1080"}>1920 x 1080</option>
+                                                        </select></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        }
 
 
-                                    <label>Width:</label>
-                                    {this.state.ImageSizeRadioValue === 'viewport'
-                                        ? <input type="text" disabled={true} name="width" value="0" />
-                                        : <input type="text"
-                                            defaultValue={1}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                this.setState({
-                                                    SizeWidthValue: +value
-                                                }, () => {
-                                                    this.props.handleUpdateSizeWidthValue(+this.state.SizeWidthValue);
-                                                });
-                                            }}
-                                        />}
-                                    <br />
-                                    <label>Height:</label>
-                                    {this.state.ImageSizeRadioValue === 'viewport'
-                                        ? <input type="text" disabled={true} name="height" value="0" />
-                                        : <input type="height"
-                                            defaultValue={1}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                this.setState({
-                                                    SizeHeightValue: +value
-                                                }, () => {
-                                                    this.props.handleUpdateSizeHeightValue(+this.state.SizeHeightValue);
-                                                });
-                                            }}
-                                        />}
+                                        <label>Width:</label>
+                                        {this.state.ImageSizeRadioValue === 'viewport'
+                                            ? <input type="text" disabled={true} name="width" value="0" />
+                                            : <input type="text"
+                                                defaultValue={1}
+                                                onChange={(e) => {
+                                                    const value = e.target.value;
+                                                    this.setState({
+                                                        SizeWidthValue: +value
+                                                    }, () => {
+                                                        this.props.handleUpdateSizeWidthValue(+this.state.SizeWidthValue);
+                                                    });
+                                                }}
+                                            />}
+                                        <br />
+                                        <label>Height:</label>
+                                        {this.state.ImageSizeRadioValue === 'viewport'
+                                            ? <input type="text" disabled={true} name="height" value="0" />
+                                            : <input type="height"
+                                                defaultValue={1}
+                                                onChange={(e) => {
+                                                    const value = e.target.value;
+                                                    this.setState({
+                                                        SizeHeightValue: +value
+                                                    }, () => {
+                                                        this.props.handleUpdateSizeHeightValue(+this.state.SizeHeightValue);
+                                                    });
+                                                }}
+                                            />}
+                                    </div>
                                 </td>
 
-                                <td>
+                                <td style={{ height: 320, width: 240, backgroundColor: 'white' }}>
+                                    <div style={{ height: 320, width: 240, backgroundColor: 'white' }}>
+                                        <h4>Image Format:</h4>
+                                        <form >
+                                            <input type="radio" value="png" checked={this.state.ImageFormatRadioValue === "png"} onChange={this.handleImageFormatChange} />
+                                            <label for="png">.png</label><br />
+                                            <input type="radio" value="jpg" checked={this.state.ImageFormatRadioValue === "jpg"} onChange={this.handleImageFormatChange} />
+                                            <label for="jpg">.jpg</label><br />
+                                            <input type="radio" value="hdr" checked={this.state.ImageFormatRadioValue === "hdr"} onChange={this.handleImageFormatChange} />
+                                            <label for="hdr">.hdr</label><br />
+                                        </form>
 
-                                    <h4>Image Format:</h4>
-                                    <form >
-                                        <input type="radio" value="png" checked={this.state.ImageFormatRadioValue === "png"} onChange={this.handleImageFormatChange} />
-                                        <label for="png">.png</label><br />
-                                        <input type="radio" value="jpg" checked={this.state.ImageFormatRadioValue === "jpg"} onChange={this.handleImageFormatChange} />
-                                        <label for="jpg">.jpg</label><br />
-                                        <input type="radio" value="hdr" checked={this.state.ImageFormatRadioValue === "hdr"} onChange={this.handleImageFormatChange} />
-                                        <label for="hdr">.hdr</label><br />
-                                    </form>
-
-                                    <input type="checkbox"
-                                        defaultValue={false}
-                                        onChange={(e) => {
-                                            const value = e.target.value;
-                                            this.setState({
-                                                ImageFormatTransparentValue: value
-                                            }, () => {
-                                                this.props.handleUpdateImageFormatTransparentValue(this.state.ImageFormatTransparentValue);
-                                            });
-                                        }} />
-                                    <label for="transparent"> Transparent</label><br />
-
-                                    <h4>Image Save Location:</h4>
-                                    <form >
-                                        <input type="radio" value="model" checked={this.state.ImageSaveLocationRadioValue === "model"} onChange={this.handleImageSaveLocationChange} />
-                                        <label for="model">Model</label><br />
-                                        <input type="radio" value="custom" checked={this.state.ImageSaveLocationRadioValue === "custom"} onChange={this.handleImageSaveLocationChange} />
-                                        <label for="custom">Custom</label><br />
-                                    </form>
-
-                                    {this.state.ImageSaveLocationRadioValue === "custom" ?
-                                        <input type="text"
-                                            defaultValue={""}
+                                        <input type="checkbox"
+                                            defaultValue={false}
                                             onChange={(e) => {
                                                 const value = e.target.value;
                                                 this.setState({
-                                                    ImageSaveLocationValue: value
+                                                    ImageFormatTransparentValue: value
                                                 }, () => {
-                                                    this.props.handleUpdateSaveLocationValue(this.state.ImageSaveLocationValue);
+                                                    this.props.handleUpdateImageFormatTransparentValue(this.state.ImageFormatTransparentValue);
                                                 });
-                                            }} /> :
-                                        <input type="text" name="savelocation" disabled={true} value="save location" />
-                                    }
-                                    {this.state.ImageSaveLocationRadioValue === "custom" ?
-                                        <button onClick={() => { this.handleBrowseButtonClick() }}>Browse</button>
-                                        :
-                                        <button disabled={true} >Browse</button>
-                                    }
+                                            }} />
+                                        <label for="transparent"> Transparent</label><br />
 
+                                        <h4>Image Save Location:</h4>
+                                        <form >
+                                            <input type="radio" value="model" checked={this.state.ImageSaveLocationRadioValue === "model"} onChange={this.handleImageSaveLocationChange} />
+                                            <label for="model">Model</label><br />
+                                            <input type="radio" value="custom" checked={this.state.ImageSaveLocationRadioValue === "custom"} onChange={this.handleImageSaveLocationChange} />
+                                            <label for="custom">Custom</label><br />
+                                        </form>
+
+                                        {this.state.ImageSaveLocationRadioValue === "custom" ?
+                                            <input type="text"
+                                                defaultValue={""}
+                                                onChange={(e) => {
+                                                    const value = e.target.value;
+                                                    this.setState({
+                                                        ImageSaveLocationValue: value
+                                                    }, () => {
+                                                        this.props.handleUpdateSaveLocationValue(this.state.ImageSaveLocationValue);
+                                                    });
+                                                }} /> :
+                                            <input type="text" name="savelocation" disabled={true} value="save location" />
+                                        }
+                                        {this.state.ImageSaveLocationRadioValue === "custom" ?
+                                            <button onClick={() => { this.handleBrowseButtonClick() }}>Browse</button>
+                                            :
+                                            <button disabled={true} >Browse</button>
+                                        }
+                                    </div>
                                 </td>
 
                             </tr>
