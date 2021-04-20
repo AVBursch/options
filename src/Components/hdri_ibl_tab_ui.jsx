@@ -44,37 +44,49 @@ export class HDRI_IBL_Tab_UI extends React.Component {
 
                     <div style={{ height: 220, width: 480, backgroundColor: '#FFF5EE' }}> {/*image goes here*/}</div>
 
-                    <label for="rotation">Rotation:</label>
-                    <input type="range" name="rotation" min={0} max={360} step={1}
-                        ref={this.ImageRotationValueNumber}
-                        defaultValue={this.state.defaultRotationValue}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            this.setState({
-                                ImageRotationValue: +value
-                            }, () => {
-                                this.ImageRotationValueNumber.current.value = +this.state.ImageRotationValue;
-                                this.props.handleUpdateImageRotationValue(+this.state.ImageRotationValue);
-                            })
-                        }}
-                    />
-                    <label>{this.state.ImageRotationValue}</label>
+                    <table>
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <td style={{ height: 32, width: 240, backgroundColor: 'white' }}>
+                                    <label for="rotation">Rotation:</label>
+                                    <input type="range" name="rotation" min={0} max={360} step={1}
+                                        ref={this.ImageRotationValueNumber}
+                                        defaultValue={this.state.defaultRotationValue}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            this.setState({
+                                                ImageRotationValue: +value
+                                            }, () => {
+                                                this.ImageRotationValueNumber.current.value = +this.state.ImageRotationValue;
+                                                this.props.handleUpdateImageRotationValue(+this.state.ImageRotationValue);
+                                            })
+                                        }}
+                                    />
+                                    <label>{this.state.ImageRotationValue}</label>
+                                </td>
 
-                    <label for="exposure">Exposure:</label>
-                    <input type="range" name="exposure" min={0.0} max={3.0} step={0.1}
-                        ref={this.ImageExposureValueNumber}
-                        defaultValue={this.state.defaultExposureValue}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            this.setState({
-                                ImageExposureValue: +value
-                            }, () => {
-                                this.ImageExposureValueNumber.current.value = +this.state.ImageExposureValue;
-                                this.props.handleUpdateImageExposureValue(+this.state.ImageExposureValue);
-                            })
-                        }}
-                    />
-                    <label>{this.state.ImageExposureValue}</label>
+                                <td style={{ height: 32, width: 240, backgroundColor: 'white' }}>
+                                    <label for="exposure">Exposure:</label>
+                                    <input type="range" name="exposure" min={0.0} max={3.0} step={0.1}
+                                        ref={this.ImageExposureValueNumber}
+                                        defaultValue={this.state.defaultExposureValue}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            this.setState({
+                                                ImageExposureValue: +value
+                                            }, () => {
+                                                this.ImageExposureValueNumber.current.value = +this.state.ImageExposureValue;
+                                                this.props.handleUpdateImageExposureValue(+this.state.ImageExposureValue);
+                                            })
+                                        }}
+                                    />
+                                    <label>{this.state.ImageExposureValue}</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <br></br>
                 </div>
             </React.Fragment>
