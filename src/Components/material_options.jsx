@@ -51,7 +51,7 @@ export class Rendering_Options_UI extends React.Component {
     render() {
         return (
             <React.Fragment >
-                <div style={{ height: 480, width: 480, backgroundColor: '#FFF5EE' }}>
+                <div style={{ height: 480, width: 480, backgroundColor: '#F3F3F7' }}>
                     <table>
                         <thead></thead>
                         <tbody>

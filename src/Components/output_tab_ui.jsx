@@ -38,8 +38,8 @@ export class Output_Tab_UI extends React.Component {
                         <thead></thead>
                         <tbody>
                             <tr>
-                                <td style={{ height: 320, width: 240, backgroundColor: 'white' }}>
-                                    <div style={{ height: 320, width: 240, backgroundColor: 'white' }}>
+                                <td style={{ height: 320, width: 240 }}>
+                                    <div style={{ height: 320, width: 240 }}>
                                         <h4>Image Size:</h4>
                                         <form >
                                             <input type="radio" value="viewport" checked={this.state.ImageSizeRadioValue === "viewport"} onChange={this.handleImageSizeChange} />
@@ -143,8 +143,8 @@ export class Output_Tab_UI extends React.Component {
                                     </div>
                                 </td>
 
-                                <td style={{ height: 320, width: 240, backgroundColor: 'white' }}>
-                                    <div style={{ height: 320, width: 240, backgroundColor: 'white' }}>
+                                <td style={{ height: 320, width: 240 }}>
+                                    <div style={{ height: 320, width: 240 }}>
                                         <h4>Image Format:</h4>
                                         <form >
                                             <input type="radio" value="png" checked={this.state.ImageFormatRadioValue === "png"} onChange={this.handleImageFormatChange} />
