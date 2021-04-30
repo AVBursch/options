@@ -44,6 +44,65 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    window.setLanguage = this.setLanguage;
+    window.setOptions = this.setOptions;
+    window.setPresets = this.setPresets;
+    window.setHDROptions = this.setHDROptions;
+
+    this.getLanguage();
+  }
+
+  getLanguage = () => {
+    sketchup.get_language();
+  }
+
+  setLanguage = (values) => {
+    this.setState({
+
+    }, () => {
+      this.getOptions();
+    });
+  }
+
+  getOptions = () => {
+    sketchup.get_options();
+  }
+
+  setOptions = (values) => {
+    // TODO: use values to set options
+
+    this.setState({
+      BackgroundValue: values["environment_background"]
+    }, () => {
+      this.getPresets();
+    });
+  }
+
+  getPresets = () => {
+    sketchup.get_presets();
+  }
+
+  setPresets = (values) => {
+    this.setState({
+
+    }, () => {
+
+    });
+  }
+
+  getHDROptions = () => {
+    sketchup.get_hdr_options();
+  }
+
+  setHDROptions = (values) => {
+    this.setState({
+
+    }, () => {
+
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
