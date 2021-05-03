@@ -53,7 +53,16 @@ class App extends React.Component {
                 { value:"1920,1080", description: "1920 x 1080" }
             ],
             presets: ["default.pps"],
-            hdrOptions: null,
+            hdrOptions: {
+                dir: "",
+                names: [
+                    "Afternoon01.hdr",
+                    "Afternoon02.hdr",
+                    "Morning01.hdr",
+                    "Sunset01.hdr",
+                    "Sunset02.hdr"
+                ]
+            },
             saveAction: "save_to",
             language: "en",
             translations: {
