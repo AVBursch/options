@@ -1,146 +1,274 @@
-//import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import { Rendering_Options_UI } from './Components/material_options';
+import Environment from './components/environment';
+import HDR from './components/hdr';
+import Output from './components/output';
+import Presets from './components/presets';
+import { en, ja, tw } from './models/translations';
+/*global sketchup*/
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-      // Output tab
-      ViewportValue: true,
-      FixedValue: false,
-      PanoramaValue: false,
-      SizeValue: "Custom",
-      SizeWidthValue: 1,
-      SizeHeightValue: 1,
-      ImageFormatPngValue: true,
-      ImageFormatJpgValue: false,
-      ImageFormatHDRValue: false,
-      ImageFormatTransparentValue: false,
-      ImageSaveModelValue: true,
-      ImageSaveModelCustomValue: false,
-      ImageSaveLocationValue: "",
-
-      // Environment tab
-      BackgroundValue: "Default (Set in Sketchup)",
-      IntensityValue: 50,
-      ExposureValue: 50,
-      RenderingModeValue: "Slow",
-      SoftOmniLightsOptionValue: false,
-      CausticsOptionValue: false,
-      ClayOptionValue: false,
-      InformationBarOptionValue: false,
-      TranslucentColorOptionValue: false,
-      AutomaticMaterialsOptionValue: false,
-
-      // HDRI/IBL tab
-      ImageStringValue: "Interior01.hdr",
-      ImageValue: "",
-      ImageRotationValue: 0,
-      ImageExposureValue: 1.5
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            options: null,
+            presets: [],
+            hdrOptions: null,
+            saveAction: "save_to",
+            language: "en",
+            translations: {
+                en: en,
+                js: ja,
+                tw: tw
+            },
+            loaded: false,
+            displayTab: "output"
+        };
+        window["setOutputDirectory"] = this.setOutputDirectory;
+        window["setOptions"] = this.setOptions;
+        window["setPresets"] = this.setPresets;
+        window["setHDROptions"] = this.setHDROptions;
+        window["setCamera"] = this.setCamera;
+        window["setLanguage"] = this.setLanguage;
     }
-  }
 
-  componentDidMount() {
-    window.setLanguage = this.setLanguage;
-    window.setOptions = this.setOptions;
-    window.setPresets = this.setPresets;
-    window.setHDROptions = this.setHDROptions;
+    componentDidMount() {
+        // start chain of calls to sketchup for loading language, options, presets and hdroptions
+        this.setState({
+            loaded: true
+        }); //this.GetLanguage();
+    }
 
-    this.getLanguage();
-  }
+    render() {
+        return this.state.loaded ? (
+            <React.Fragment>
+                <div style={{ margin: 10, width: 300 }}>
+                    <Presets />
+                    <div>
+                        <ul>
+                            <li>
+                                <button
+                                    style={this.state.displayTab === "output" ? { borderBottom: '1px solid black' } : { border: '0px' }}
+                                    onClick={(e) => { this.setState({ displayTab: "output" }) }}
+                                >
+                                    {this.state.translations[this.state.language].output}
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    style={this.state.displayTab === "environment" ? { borderBottom: '1px solid black' } : { border: '0px' }}
+                                    onClick={(e) => { this.setState({ displayTab: "environment" }) }}
+                                >
+                                    {this.state.translations[this.state.language].environment}
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    disabled={!this.canShowHDR()}
+                                    style={this.state.displayTab === "hdr" ? { borderBottom: '1px solid black' } : { border: '0px' }}
+                                    onClick={(e) => { this.setState({ displayTab: "hdr" }) }}
+                                >
+                                    HDRI/IBL
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        {
+                            this.state.displayTab === "output" ?
+                                <Output
+                                    options={this.state.options}
+                                    language={this.state.language}
+                                    translations={this.state.translations}
+                                /> :
+                                null
+                        }
+                        {
+                            this.state.displayTab === "environment" ?
+                                <Environment
+                                    options={this.state.options}
+                                    language={this.state.language}
+                                    translations={this.state.translations}
+                                /> :
+                                null
+                        }
+                        {
+                            this.state.displayTab === "hdr" ?
+                                <HDR
+                                    options={this.state.options}
+                                    hdrOptions={this.state.hdrOptions}
+                                    language={this.state.language}
+                                    translations={this.state.translations}
+                                /> :
+                                null
+                        }
+                    </div>
+                    <div style={{ float: 'right' }}>
+                        <button onClick={this.cancel}>
+                            {this.state.translations[this.state.language].cancel}
+                        </button>
+                        <button onClick={this.save}>
+                            {this.state.translations[this.state.language].save}
+                        </button>
+                    </div>
+                </div>
+            </React.Fragment>
+        ) : null
+    }
 
-  getLanguage = () => {
-    sketchup.get_language();
-  }
+    canShowHDR() {
+        if (
+            this.state.options !== null &&
+            this.state.options !== undefined &&
+            this.state.options.environment_background === "hdr"
+        ) {
+            return true;
+        }
+        return false;
+    }
 
-  setLanguage = (values) => {
-    this.setState({
+    showHDR() {
+        if (this.state.options.hdr_texture !== "" && this.canShowHDR()) {
+            this.hdrComponent["setBackground"]();
+        }
+    }
 
-    }, () => {
-      this.getOptions();
-    });
-  }
+    save() {
+        if (this.saveAction === "reset") {
+            this.reset();
+            this.Save(JSON.stringify(this.options));
+        } else if (this.saveAction === "switch_to") {
+            this.Switch(JSON.stringify(this.options));
+        } else {
+            this.Save(JSON.stringify(this.options));
+        }
+    }
 
-  getOptions = () => {
-    sketchup.get_options();
-  }
+    reset() {
+        this.setState({
+            options: {
+                preset: "default.pps",
+                output_dimensions: "viewport",
+                output_dimensions_width: 0,
+                output_dimensions_height: 0,
+                output_format: "png",
+                output_mode: "model",
+                output_directory: "",
+                environment_background: "default",
+                environment_clay: false,
+                output_info: false,
+                environment_caustic: false,
+                environment_brightness: 50,
+                environment_contrast: 50,
+                environment_spherical_point_lights: false,
+                environment_translucent_color: false,
+                environment_automatic_materials: false,
+                rendering_mode: "fast",
+                hdr_texture: "Afternoon01.hdr",
+                hdr_exposure: 1.4,
+                hdr_rotation: 0,
+                stereo_3d_num_eyes: 2,
+                stereo_3d_eye_focal_length: 2.5,
+                stereo_3d_eye_rig_plane: "left-right"
+            }
+        });
+    }
 
-  setOptions = (values) => {
-    // TODO: use values to set options
+    cancel() {
+        this.Cancel();
+    }
 
-    this.setState({
-      BackgroundValue: values["environment_background"]
-    }, () => {
-      this.getPresets();
-    });
-  }
+    // called from sketchup
 
-  getPresets = () => {
-    sketchup.get_presets();
-  }
+    setOutputDirectory = (value) => {
+        this.state.options.output_directory = value;
+        this.setState({
+            options: { ... this.state.options }
+        });
+    }
 
-  setPresets = (values) => {
-    this.setState({
+    setOptions = (options) => {
+        this.setState({
+            options: options
+        }, () => {
+            this.GetPresets();
+        });
+    }
 
-    }, () => {
+    setPresets = (presets) => {
+        this.setState({
+            presets: presets
+        }, () => {
+            this.GetHDROptions();
+        });
+    }
 
-    });
-  }
+    setHDROptions = (hdrOptions) => {
+        this.setState({
+            hdrOptions: hdrOptions
+        }, () => {
+            this.setState({
+                loaded: true
+            });
+        });
+    }
 
-  getHDROptions = () => {
-    sketchup.get_hdr_options();
-  }
+    setCamera = (x, y, z) => {
+        this.zone.run(() => {
+            if (this.options.hdr_texture !== "" && this.canShowHDR()) {
+                this.hdrComponent["updateCamera"](x, y, z);
+            }
+        });
+    }
 
-  setHDROptions = (values) => {
-    this.setState({
+    setLanguage = (language) => {
+        this.setState({
+            language: language
+        }, () => {
+            this.GetOptions();
+        });
+    }
 
-    }, () => {
+    // call to sketchup
+    Save = (value) => {
+        sketchup.save(value);
+    }
 
-    });
-  }
+    Switch = (value) => {
+        sketchup.switch(value);
+    }
 
-  render() {
-    return (
-      <React.Fragment>
-        <Rendering_Options_UI
-          ViewportValue={this.state.ViewportValue}
-          FixedValue={this.state.FixedValue}
-          PanoramaValue={this.state.PanoramaValue}
-          SizeValue={this.state.SizeValue}
-          SizeWidthValue={this.state.SizeWidthValue}
-          SizeHeightValue={this.state.SizeHeightValue}
-          ImageFormatPngValueValue={this.state.ImageFormatPngValue}
-          ImageFormatJpgValue={this.state.ImageFormatJpgValue}
-          ImageFormatTransparentValue={this.state.ImageFormatTransparentValue}
-          ImageSaveModelValue={this.state.ImageSaveModelValue}
-          ImageSaveModelCustomValue={this.state.ImageSaveModelCustomValue}
-          ImageSaveLocationValue={this.state.ImageSaveLocationValue}
+    Cancel = () => {
+        sketchup.cancel();
+    }
 
-          BackgroundValue={this.state.BackgroundValue}
-          IntensityValue={this.state.IntensityValue}
-          ExposureValue={this.state.ExposureValue}
-          RenderingModeValue={this.state.RenderingModeValue}
-          SoftOmniLightsOptionValue={this.state.SoftOmniLightsOptionValue}
-          CausticOptionValue={this.state.CausticsOptionValue}
-          ClayOptionValue={this.state.ClayOptionValue}
-          InformationBarOptionValue={this.state.InformationBarOptionValue}
-          TranslucentColorOptionValue={this.state.TranslucentColorOptionValue}
-          AutomaticMaterialsOptionValue={this.state.AutomaticMaterialsOptionValue}
+    ComparePresets = () => {
+        sketchup.compare_presets();
+    }
 
-          ImageStringValue={this.state.ImageStringValue}
-          ImageValue={this.state.ImageValue}
-          ImageRotationValue={this.state.ImageRotationValue}
-          ImageExposureValue={this.state.ImageExposureValue}
-        />
-      </React.Fragment>
-    )
-  }
+    GetOutputDirectory = () => {
+        sketchup.get_output_directory();
+    }
+
+    GetOptions = () => {
+        sketchup.get_options();
+    }
+
+    GetPresets = () => {
+        sketchup.get_presets();
+    }
+
+    GetHDROptions = () => {
+        sketchup.get_hdr_options();
+    }
+
+    GetCamera = () => {
+        sketchup.get_camera();
+    }
+
+    GetLanguage = () => {
+        sketchup.get_language();
+    }
 }
-
-
 
 export default App;
