@@ -82,7 +82,7 @@ class App extends React.Component {
     render() {
         return this.state.loaded ? (
             <React.Fragment>
-                <div style={{ margin: 10, width: 400 }}>
+                <div style={{ margin: 10, width: 500 }}>
                     <Presets
                         translations={this.state.translations}
                         language={this.state.language}

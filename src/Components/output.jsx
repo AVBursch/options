@@ -48,7 +48,7 @@ class Output extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <table style={{ width: 400 }}>
+                <table style={{ width: 500 }}>
                     <tbody>
                         <tr>
                             <td>
