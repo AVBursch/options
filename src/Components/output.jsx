@@ -79,6 +79,7 @@ class Output extends React.Component {
                                     onChange={(e) => {
                                         if (e.target.checked) {
                                             this.props.options.output_dimensions = "panorama";
+                                            this.props.options.output_dimensions_height = this.props.options.output_dimensions_width > 0 ? this.props.options.output_dimensions_width / (2 / 1) : 0;
                                             this.props.updateOptions(this.props.options);
                                         }
                                     }}
@@ -109,17 +110,26 @@ class Output extends React.Component {
                                 </select>
                                 <br />
                                 <label>{this.props.translations[this.props.language].width}</label>
-                                <input ref={this.widthRef} type="number"
+                                <input 
+                                    ref={this.widthRef} 
+                                    type="number"
+                                    disabled={this.props.options.output_dimensions === "viewport"}
                                     defaultValue={this.props.output_dimensions_width}
                                     onChange={(e) => {
                                         const value = e.target.value;
                                         this.props.options.output_dimensions_width = +value;
+                                        if(this.props.options.output_dimensions === "panorama") {
+                                            this.props.options.output_dimensions_height = this.props.options.output_dimensions_width > 0 ? this.props.options.output_dimensions_width / (2 / 1) : 0;
+                                        }
                                         this.props.updateOptions(this.props.options);
                                     }}
                                 />
                                 <br />
                                 <label>{this.props.translations[this.props.language].height}</label>
-                                <input ref={this.heightRef} type="number"
+                                <input 
+                                    ref={this.heightRef} 
+                                    type="number"
+                                    disabled={this.props.options.output_dimensions !== "fixed"}
                                     defaultValue={this.props.output_dimensions_height}
                                     onChange={(e) => {
                                         const value = e.target.value;
@@ -176,6 +186,7 @@ class Output extends React.Component {
                                     onChange={(e) => {
                                         if (e.target.checked) {
                                             this.props.options.output_mode = "model";
+                                            this.props.options.output_directory = "";
                                             this.props.updateOptions(this.props.options);
                                         }
                                     }}
@@ -193,15 +204,23 @@ class Output extends React.Component {
                                 <br />
                                 <input
                                     ref={this.outputDirectoryRef}
-                                    type="file"
+                                    disabled={this.props.options.output_mode === "model"}
+                                    style={{ float: 'right' }}
+                                    placeholder="Save location"
                                     onChange={(e) => {
-                                        const value = this.outputDirectoryRef.current.files[0].name;
-                                        console.log(value);
+                                        const value = e.target.value;
+                                        this.props.options.output_directory = value;
+                                        this.props.updateOptions(this.props.options);
                                     }}
                                 />
-                                <button onClick={(e) => {
-                                    this.outputDirectoryRef.current.click();
-                                }}>
+                                <br />
+                                <button
+                                    disabled={this.props.options.output_mode === "model"}
+                                    style={{ float: 'right' }}
+                                    onClick={(e) => {
+                                        this.props.getOutputDirectory();
+                                    }}
+                                >
                                     {this.props.translations[this.props.language].browse}
                                 </button>
                             </td>

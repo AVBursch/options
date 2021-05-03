@@ -128,6 +128,7 @@ class App extends React.Component {
                                     dimensions={this.state.dimensions}
                                     options={this.state.options}
                                     updateOptions={this.updateOptions}
+                                    getOutputDirectory={this.GetOutputDirectory}
                                 /> :
                                 null
                         }
