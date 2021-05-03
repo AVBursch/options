@@ -12,9 +12,47 @@ class App extends React.Component {
         super(props);
         this.state = {
             options: {
-                preset: ""
+                geometry_caching: false,
+                preset: "default.pps",
+                rendering_mode: "fast",
+                // output
+                output_dimensions: "viewport",
+                output_dimensions_width: 0,
+                output_dimensions_height: 0,
+                output_format: "png",
+                output_mode: "model",
+                output_directory: "",
+                output_info: false,
+                // environment
+                environment_background: "default",
+                environment_sun: false,
+                environment_turbidity: 4,
+                environment_exposure: 2.5,
+                environment_clay: false,
+                environment_caustic: false,
+                environment_brightness: 50,
+                environment_contrast: 50,
+                environment_spherical_point_lights: false,
+                environment_translucent_color: false,
+                environment_automatic_materials: false,
+                environment_show_render_all: false,
+                // hdr
+                hdr_texture: "Afternoon01.hdr",
+                hdr_rotation: 0,
+                hdr_exposure: 1.4
             },
-            presets: ["test1", "test2", "test3"],
+            dimensions: [
+                { value: "230,150", description: "230 x 150" },
+                { value: "640,480", description: "640 x 480" },
+                { value: "1024,768", description: "1024 x 768" },
+                { value: "2048,1536", description: "2048 x 1536" },
+                { value: "3076,2034", description: "3076 x 2034" },
+                { value: "4076,3304", description: "4076 x 3304" },
+                { value: "852,480", description: "852 x 480" },
+                { value: "1600,900", description: "1600 x 900" },
+                { value:"1920,1080", description: "1920 x 1080" }
+            ],
+            presets: ["default.pps"],
             hdrOptions: null,
             saveAction: "save_to",
             language: "en",
@@ -45,16 +83,12 @@ class App extends React.Component {
         return this.state.loaded ? (
             <React.Fragment>
                 <div style={{ margin: 10, width: 400 }}>
-                    <Presets 
-                        translations={this.state.translations} 
-                        language={this.state.language} 
-                        presets={this.state.presets} 
-                        updatePreset={(value) => { 
-                            this.state.options.preset = value;
-                            this.setState({options: {...this.state.options}}, ()=> {
-                                console.log(this.state.options.preset);
-                            });
-                        }}
+                    <Presets
+                        translations={this.state.translations}
+                        language={this.state.language}
+                        presets={this.state.presets}
+                        options={this.state.options}
+                        updateOptions={this.updateOptions}
                     />
                     <div>
                         <ul>
@@ -89,28 +123,32 @@ class App extends React.Component {
                         {
                             this.state.displayTab === "output" ?
                                 <Output
-                                    options={this.state.options}
                                     language={this.state.language}
                                     translations={this.state.translations}
+                                    dimensions={this.state.dimensions}
+                                    options={this.state.options}
+                                    updateOptions={this.updateOptions}
                                 /> :
                                 null
                         }
                         {
                             this.state.displayTab === "environment" ?
                                 <Environment
-                                    options={this.state.options}
                                     language={this.state.language}
                                     translations={this.state.translations}
+                                    options={this.state.options}
+                                    updateOptions={this.updateOptions}
                                 /> :
                                 null
                         }
                         {
                             this.state.displayTab === "hdr" ?
                                 <HDR
-                                    options={this.state.options}
-                                    hdrOptions={this.state.hdrOptions}
                                     language={this.state.language}
                                     translations={this.state.translations}
+                                    hdrOptions={this.state.hdrOptions}
+                                    options={this.state.options}
+                                    updateOptions={this.updateOptions}
                                 /> :
                                 null
                         }
@@ -126,6 +164,14 @@ class App extends React.Component {
                 </div>
             </React.Fragment>
         ) : null
+    }
+
+    updateOptions = (options) => {
+        this.setState({
+            options: { ...options }
+        }, () => {
+            console.log(this.state.options);
+        });
     }
 
     canShowHDR() {
@@ -159,29 +205,34 @@ class App extends React.Component {
     reset() {
         this.setState({
             options: {
+                geometry_caching: false,
                 preset: "default.pps",
+                rendering_mode: "fast",
+                // output
                 output_dimensions: "viewport",
                 output_dimensions_width: 0,
                 output_dimensions_height: 0,
                 output_format: "png",
                 output_mode: "model",
                 output_directory: "",
-                environment_background: "default",
-                environment_clay: false,
                 output_info: false,
+                // environment
+                environment_background: "default",
+                environment_sun: false,
+                environment_turbidity: 4,
+                environment_exposure: 2.5,
+                environment_clay: false,
                 environment_caustic: false,
                 environment_brightness: 50,
                 environment_contrast: 50,
                 environment_spherical_point_lights: false,
                 environment_translucent_color: false,
                 environment_automatic_materials: false,
-                rendering_mode: "fast",
+                environment_show_render_all: false,
+                // hdr
                 hdr_texture: "Afternoon01.hdr",
-                hdr_exposure: 1.4,
                 hdr_rotation: 0,
-                stereo_3d_num_eyes: 2,
-                stereo_3d_eye_focal_length: 2.5,
-                stereo_3d_eye_rig_plane: "left-right"
+                hdr_exposure: 1.4
             }
         });
     }

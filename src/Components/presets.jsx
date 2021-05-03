@@ -20,7 +20,8 @@ class Presets extends React.Component {
                         style={{float: 'right'}}
                         onChange={(e) => {
                             const value = e.target.value;
-                            this.props.updatePreset(value);
+                            this.props.options.preset = value;
+                            this.props.updateOptions(this.props.options);
                         }}
                     >
                         {
