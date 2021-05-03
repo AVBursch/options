@@ -14,7 +14,17 @@ class Presets extends React.Component {
     render() {
         return (
             <React.Fragment>
-                Presets
+                <label>{this.props.translations[this.props.language].presetName}</label>
+                <select>
+                    {
+                        this.props.presets.map((preset) => {
+                            return (
+                                <option value={preset}>{preset}</option>
+                            )
+                        })
+                    }
+                </select>
+                <button onClick={this.props.comparePresets}>{this.props.translations[this.props.language].comparePresets}</button>
             </React.Fragment>
         )
     }
