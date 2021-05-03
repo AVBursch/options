@@ -11,8 +11,10 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            options: null,
-            presets: [],
+            options: {
+                preset: ""
+            },
+            presets: ["test1", "test2", "test3"],
             hdrOptions: null,
             saveAction: "save_to",
             language: "en",
@@ -42,8 +44,18 @@ class App extends React.Component {
     render() {
         return this.state.loaded ? (
             <React.Fragment>
-                <div style={{ margin: 10, width: 300 }}>
-                    <Presets />
+                <div style={{ margin: 10, width: 400 }}>
+                    <Presets 
+                        translations={this.state.translations} 
+                        language={this.state.language} 
+                        presets={this.state.presets} 
+                        updatePreset={(value) => { 
+                            this.state.options.preset = value;
+                            this.setState({options: {...this.state.options}}, ()=> {
+                                console.log(this.state.options.preset);
+                            });
+                        }}
+                    />
                     <div>
                         <ul>
                             <li>
