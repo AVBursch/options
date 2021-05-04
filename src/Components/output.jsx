@@ -88,6 +88,7 @@ class Output extends React.Component {
                                 <label>{this.props.translations[this.props.language].size}</label>
                                 <select
                                     ref={this.dimensionsRef}
+                                    disabled={this.props.options.output_dimensions !== "fixed"}
                                     defaultValue={this.getImageSizeValue()}
                                     onChange={(e) => {
                                         const value = e.target.value;

@@ -63,7 +63,6 @@ class App extends React.Component {
                     "Sunset02.hdr"
                 ]
             },
-            saveAction: "save_to",
             language: "en",
             translations: {
                 en: en,
@@ -83,9 +82,7 @@ class App extends React.Component {
 
     componentDidMount() {
         // start chain of calls to sketchup for loading language, options, presets and hdroptions
-        this.setState({
-            loaded: true
-        }); //this.GetLanguage();
+        this.GetLanguage();
     }
 
     render() {
@@ -96,6 +93,7 @@ class App extends React.Component {
                         translations={this.state.translations}
                         language={this.state.language}
                         presets={this.state.presets}
+                        comparePresets={this.ComparePresets}
                         options={this.state.options}
                         updateOptions={this.updateOptions}
                     />
@@ -202,14 +200,7 @@ class App extends React.Component {
     }
 
     save() {
-        if (this.saveAction === "reset") {
-            this.reset();
-            this.Save(JSON.stringify(this.options));
-        } else if (this.saveAction === "switch_to") {
-            this.Switch(JSON.stringify(this.options));
-        } else {
-            this.Save(JSON.stringify(this.options));
-        }
+        this.Save(JSON.stringify(this.options));
     }
 
     reset() {
