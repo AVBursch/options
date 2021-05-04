@@ -6,6 +6,7 @@ import Output from './components/output';
 import Presets from './components/presets';
 import { en, ja, tw } from './models/translations';
 /*global sketchup*/
+const debug = true;
 
 class App extends React.Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class App extends React.Component {
                 { value: "4076,3304", description: "4076 x 3304" },
                 { value: "852,480", description: "852 x 480" },
                 { value: "1600,900", description: "1600 x 900" },
-                { value:"1920,1080", description: "1920 x 1080" }
+                { value: "1920,1080", description: "1920 x 1080" }
             ],
             presets: ["default.pps"],
             hdrOptions: {
@@ -82,7 +83,13 @@ class App extends React.Component {
 
     componentDidMount() {
         // start chain of calls to sketchup for loading language, options, presets and hdroptions
-        this.GetLanguage();
+        if (debug) {
+            this.setState({
+                loaded: true
+            });
+        } else {
+            this.GetLanguage();
+        }
     }
 
     render() {
