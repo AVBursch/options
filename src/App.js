@@ -6,7 +6,7 @@ import Output from './components/output';
 import Presets from './components/presets';
 import { en, ja, tw } from './models/translations';
 /*global sketchup*/
-const debug = true;
+const debug = true;  // true
 
 class App extends React.Component {
     constructor(props) {
@@ -95,7 +95,7 @@ class App extends React.Component {
     render() {
         return this.state.loaded ? (
             <React.Fragment>
-                <div style={{ margin: 10, width: 500 }}>
+                <div style={{ margin: 10, width: 500, backgroundColor: "#F3F3F7" }}>
                     <Presets
                         translations={this.state.translations}
                         language={this.state.language}
@@ -168,7 +168,7 @@ class App extends React.Component {
                                 null
                         }
                     </div>
-                    <div style={{ float: 'right' }}>
+                    <div style={{ float: 'right', backgroundColor: "#F3F3F7" }}>
                         <button onClick={this.cancel}>
                             {this.state.translations[this.state.language].cancel}
                         </button>
