@@ -6,7 +6,7 @@ import Output from './components/output';
 import Presets from './components/presets';
 import { en, ja, tw } from './models/translations';
 /*global sketchup*/
-const debug = true;  // true
+const debug = false;  // true
 
 class App extends React.Component {
     constructor(props) {
@@ -77,7 +77,6 @@ class App extends React.Component {
         window["setOptions"] = this.setOptions;
         window["setPresets"] = this.setPresets;
         window["setHDROptions"] = this.setHDROptions;
-        window["setCamera"] = this.setCamera;
         window["setLanguage"] = this.setLanguage;
     }
 
@@ -200,12 +199,6 @@ class App extends React.Component {
         return false;
     }
 
-    showHDR() {
-        if (this.state.options.hdr_texture !== "" && this.canShowHDR()) {
-            this.hdrComponent["setBackground"]();
-        }
-    }
-
     save() {
         this.Save(JSON.stringify(this.options));
     }
@@ -275,20 +268,13 @@ class App extends React.Component {
     }
 
     setHDROptions = (hdrOptions) => {
+        console.log(hdrOptions);
         this.setState({
             hdrOptions: hdrOptions
         }, () => {
             this.setState({
                 loaded: true
             });
-        });
-    }
-
-    setCamera = (x, y, z) => {
-        this.zone.run(() => {
-            if (this.options.hdr_texture !== "" && this.canShowHDR()) {
-                this.hdrComponent["updateCamera"](x, y, z);
-            }
         });
     }
 
@@ -331,10 +317,6 @@ class App extends React.Component {
 
     GetHDROptions = () => {
         sketchup.get_hdr_options();
-    }
-
-    GetCamera = () => {
-        sketchup.get_camera();
     }
 
     GetLanguage = () => {
