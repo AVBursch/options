@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 
 class Presets extends React.Component {
     constructor(props) {
@@ -16,43 +16,38 @@ class Presets extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Row>
-                    <Col>
-                        {this.props.translations[this.props.language].presetName}
-                    </Col>
-                    <Col>
-                        <DropdownButton 
-                            variant="light"
-                            style={{float: "right"}}
-                            title={this.props.options.preset}
-                        >
-                        {
-                                this.props.presets.map((preset, index) => {
-                                    return (
-                                            <Dropdown.Item onClick={(e) => {
-                                                this.props.options.preset = preset;
-                                                this.props.updateOptions(this.props.options);
-                                            }}>
-                                                {preset}
-                                            </Dropdown.Item>
-                                    )
-                                })
-                            }
-                        </DropdownButton>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col></Col>
-                    <Col>
-                        <Button
-                            variant="link"
-                            style={{float: "right"}}
-                            onClick={this.props.comparePresets}
-                        >
-                            {this.props.translations[this.props.language].comparePresets}
-                        </Button>
-                    </Col>
-                </Row>
+                <Form>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="3" style={{ fontWeight: 600 }}>
+                            {this.props.translations[this.props.language].presetName}
+                        </Form.Label>
+                        <Col sm="9">
+                            <Form.Control as="select"
+                                defaultValue={this.props.options.preset}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    this.props.options.preset = value;
+                                    this.props.updateOptions(this.props.options);
+                                }}
+                            >
+                                {
+                                    this.props.presets.map((preset, index) => {
+                                        return (
+                                            <option value={preset}>{preset}</option>
+                                        )
+                                    })
+                                }
+                            </Form.Control>
+                            <Button
+                                variant="link"
+                                style={{ float: "right" }}
+                                onClick={this.props.comparePresets}
+                            >
+                                {this.props.translations[this.props.language].comparePresets}
+                            </Button>
+                        </Col>
+                    </Form.Group>
+                </Form>
             </React.Fragment >
         )
     }
