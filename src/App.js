@@ -5,8 +5,10 @@ import HDR from './components/hdr';
 import Output from './components/output';
 import Presets from './components/presets';
 import { en, ja, tw } from './models/translations';
+import { Button, Container, Nav, Col, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 /*global sketchup*/
-const debug = false;  // true
+window["debug"] = true;
 
 class App extends React.Component {
     constructor(props) {
@@ -82,7 +84,7 @@ class App extends React.Component {
 
     componentDidMount() {
         // start chain of calls to sketchup for loading language, options, presets and hdroptions
-        if (debug) {
+        if (window["debug"]) {
             this.setState({
                 loaded: true
             });
@@ -94,7 +96,7 @@ class App extends React.Component {
     render() {
         return this.state.loaded ? (
             <React.Fragment>
-                <div style={{ margin: 10, width: 500, backgroundColor: "#F3F3F7" }}>
+                <Container>
                     <Presets
                         translations={this.state.translations}
                         language={this.state.language}
@@ -103,35 +105,31 @@ class App extends React.Component {
                         options={this.state.options}
                         updateOptions={this.updateOptions}
                     />
-                    <div>
-                        <ul>
-                            <li>
-                                <button
-                                    style={this.state.displayTab === "output" ? { borderBottom: '1px solid black' } : { border: '0px' }}
-                                    onClick={(e) => { this.setState({ displayTab: "output" }) }}
-                                >
-                                    {this.state.translations[this.state.language].output}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    style={this.state.displayTab === "environment" ? { borderBottom: '1px solid black' } : { border: '0px' }}
-                                    onClick={(e) => { this.setState({ displayTab: "environment" }) }}
-                                >
-                                    {this.state.translations[this.state.language].environment}
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    disabled={!this.canShowHDR()}
-                                    style={this.state.displayTab === "hdr" ? { borderBottom: '1px solid black' } : { border: '0px' }}
-                                    onClick={(e) => { this.setState({ displayTab: "hdr" }) }}
-                                >
-                                    HDRI/IBL
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+                    <Nav variant="tabs" defaultActiveKey="output">
+                        <Nav.Item>
+                            <Nav.Link eventKey="output"
+                                onClick={(e) => { this.setState({ displayTab: "output" }) }}
+                            >
+                                {this.state.translations[this.state.language].output}
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="environment"
+                                onClick={(e) => { this.setState({ displayTab: "environment" }) }}
+                            >
+                                {this.state.translations[this.state.language].environment}
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link
+                                eventKey="hdr"
+                                disabled={!this.canShowHDR()}
+                                onClick={(e) => { this.setState({ displayTab: "hdr" }) }}
+                            >
+                                HDRI/IBL
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
                     <div>
                         {
                             this.state.displayTab === "output" ?
@@ -167,15 +165,21 @@ class App extends React.Component {
                                 null
                         }
                     </div>
-                    <div style={{ float: 'right', backgroundColor: "#F3F3F7" }}>
-                        <button onClick={this.cancel}>
+                    <div style={{ float: 'right' }}>
+                        <Button
+                            variant="light"
+                            style={{margin: 5}}
+                            onClick={this.cancel}>
                             {this.state.translations[this.state.language].cancel}
-                        </button>
-                        <button onClick={this.save}>
+                        </Button>
+                        <Button
+                            variant="light"
+                            style={{margin: 5}}
+                            onClick={this.save}>
                             {this.state.translations[this.state.language].save}
-                        </button>
+                        </Button>
                     </div>
-                </div>
+                </Container>
             </React.Fragment>
         ) : null
     }
@@ -268,7 +272,6 @@ class App extends React.Component {
     }
 
     setHDROptions = (hdrOptions) => {
-        console.log(hdrOptions);
         this.setState({
             hdrOptions: hdrOptions
         }, () => {

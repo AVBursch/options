@@ -1,4 +1,6 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 
 class Presets extends React.Component {
     constructor(props) {
@@ -14,34 +16,44 @@ class Presets extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{marginBottom: 20}}>
-                    <label>{this.props.translations[this.props.language].presetName}</label>
-                    <select 
-                        style={{float: 'right'}}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            this.props.options.preset = value;
-                            this.props.updateOptions(this.props.options);
-                        }}
-                    >
+                <Row>
+                    <Col>
+                        {this.props.translations[this.props.language].presetName}
+                    </Col>
+                    <Col>
+                        <DropdownButton 
+                            variant="light"
+                            style={{float: "right"}}
+                            title={this.props.options.preset}
+                        >
                         {
-                            this.props.presets.map((preset, index) => {
-                                return (
-                                    <option key={index} value={preset}>{preset}</option>
-                                )
-                            })
-                        }
-                    </select>
-                    <div>
-                        <span
-                            style={{ borderBottom: '1px solid black', cursor: 'pointer', float: 'right' }}
+                                this.props.presets.map((preset, index) => {
+                                    return (
+                                            <Dropdown.Item onClick={(e) => {
+                                                this.props.options.preset = preset;
+                                                this.props.updateOptions(this.props.options);
+                                            }}>
+                                                {preset}
+                                            </Dropdown.Item>
+                                    )
+                                })
+                            }
+                        </DropdownButton>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col>
+                        <Button
+                            variant="link"
+                            style={{float: "right"}}
                             onClick={this.props.comparePresets}
                         >
                             {this.props.translations[this.props.language].comparePresets}
-                        </span>
-                    </div>
-                </div>
-            </React.Fragment>
+                        </Button>
+                    </Col>
+                </Row>
+            </React.Fragment >
         )
     }
 }

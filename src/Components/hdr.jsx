@@ -21,7 +21,9 @@ class HDR extends React.Component {
 
     componentDidMount() {
         if (this.props.options.hdr_texture !== "") {
-            this.setBackground();
+            if(!window["debug"]) {
+                this.setBackground();
+            }
         }
     }
 
