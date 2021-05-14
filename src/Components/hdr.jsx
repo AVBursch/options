@@ -1,6 +1,8 @@
 import React from 'react';
 import * as THREE from 'three';
 import HDRPreview from '../models/hdrPreview'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 /*global sketchup*/
 
 class HDR extends React.Component {

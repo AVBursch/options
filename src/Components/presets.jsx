@@ -24,6 +24,7 @@ class Presets extends React.Component {
                         <Col sm="9">
                             <Form.Control as="select"
                                 defaultValue={this.props.options.preset}
+                                size="sm"
                                 onChange={(e) => {
                                     const value = e.target.value;
                                     this.props.options.preset = value;

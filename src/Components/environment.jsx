@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Environment extends React.Component {
     constructor(props) {
@@ -42,145 +44,189 @@ class Environment extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{ backgroundColor: "white" }}>
-                    <table style={{ width: 500 }}>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div style={{ height: 250, width: 250 }}>
-                                        <label><b>{this.props.translations[this.props.language].background}:</b></label>
-                                        <br />
-                                        <select
-                                            defaultValue={this.props.options.environment_background}
-                                            onClick={(e) => {
-                                                const value = e.target.value;
-                                                this.props.options.environment_background = value;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        >
-                                            <option value="default">{this.props.translations[this.props.language].defaultSky}</option>
-                                            <option value="sky">{this.props.translations[this.props.language].podiumPhysicalSky1}</option>
-                                            <option value="sky2">{this.props.translations[this.props.language].podiumPhysicalSky2}</option>
-                                            <option value="hdr">HDRI/IBL</option>
-                                        </select>
-                                        <br />
-                                        <label><b>{this.props.translations[this.props.language].sunSkyBrightness}:</b></label>
-                                        <br />
-                                        <label>{this.props.translations[this.props.language].intensity}</label>
-                                        <input
-                                            ref={this.intensityRef}
-                                            type="range"
-                                            min={0}
-                                            max={100}
-                                            defaultValue={this.props.options.environment_brightness}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                this.props.options.environment_brightness = value;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        />
-                                        <label>{this.props.options.environment_brightness}</label>
-                                        <br />
-                                        <label>{this.props.translations[this.props.language].exposure}</label>
-                                        <input
-                                            ref={this.exposureRef}
-                                            type="range"
-                                            min={0}
-                                            max={100}
-                                            defaultValue={this.props.options.environment_contrast}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                this.props.options.environment_contrast = value;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        />
-                                        <label>{this.props.options.environment_contrast}</label>
-                                        <br />
-                                        <button
-                                            style={{ float: 'right' }}
-                                            onClick={(e) => {
-                                                this.props.options.environment_brightness = 50;
-                                                this.props.options.environment_contrast = 50;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        >
-                                            {this.props.translations[this.props.language].reset}
-                                        </button>
-                                    </div>
-                                </td>
-
-
-                                <td>
-                                    <div style={{ height: 250, width: 250 }}>
-                                        <label><b>{this.props.translations[this.props.language].renderingMode}:</b></label>
-                                        <br />
-                                        <select
-                                            defaultValue={this.props.options.rendering_mode}
-                                            onClick={(e) => {
-                                                const value = e.target.value;
-                                                this.props.options.rendering_mode = value;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        >
-                                            <option value="fast">{this.props.translations[this.props.language].fast}</option>
-                                            <option value="slow">{this.props.translations[this.props.language].slow}</option>
-                                        </select>
-                                        <br />
-                                        <label><b>{this.props.translations[this.props.language].options}:</b></label>
-                                        <br />
-                                        <input ref={this.softOmniLightsRef} type="checkbox"
-                                            checked={this.props.options.environment_spherical_point_lights}
-                                            onChange={(e) => {
-                                                this.props.options.environment_spherical_point_lights = e.target.checked;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        /> {this.props.translations[this.props.language].softOmniLights}
-                                        <br />
-                                        <input ref={this.causticRef} type="checkbox"
-                                            checked={this.props.options.environment_caustic}
-                                            onChange={(e) => {
-                                                this.props.options.environment_caustic = e.target.checked;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        /> {this.props.translations[this.props.language].caustics}
-                                        <br />
-                                        <input ref={this.clayRef} type="checkbox"
-                                            checked={this.props.options.environment_clay}
-                                            onChange={(e) => {
-                                                this.props.options.environment_clay = e.target.checked;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        /> {this.props.translations[this.props.language].clay}
-                                        <br />
-                                        <input ref={this.outputInfoRef} type="checkbox"
-                                            checked={this.props.options.output_info}
-                                            onChange={(e) => {
-                                                this.props.options.output_info = e.target.checked;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        /> {this.props.translations[this.props.language].informationBar}
-                                        <br />
-                                        <input ref={this.translucentColorRef} type="checkbox"
-                                            checked={this.props.options.environment_translucent_color}
-                                            onChange={(e) => {
-                                                this.props.options.environment_translucent_color = e.target.checked;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        /> {this.props.translations[this.props.language].translucentColor}
-                                        <br />
-                                        <input ref={this.automaticMaterialsRef} type="checkbox"
-                                            checked={this.props.options.environment_automatic_materials}
-                                            onChange={(e) => {
-                                                this.props.options.environment_automatic_materials = e.target.checked;
-                                                this.props.updateOptions(this.props.options);
-                                            }}
-                                        /> {this.props.translations[this.props.language].automaticMaterials}
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Form.Group as={Row} style={{ marginTop: 10, marginBottom: 5 }}>
+                                <Form.Label style={{ fontWeight: 600, marginLeft: 10 }}>
+                                    {this.props.translations[this.props.language].background}:
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Control as="select"
+                                    size="sm"
+                                    style={{ marginLeft: 10, width: 300 }}
+                                    defaultValue={this.props.options.environment_background}
+                                    onClick={(e) => {
+                                        const value = e.target.value;
+                                        this.props.options.environment_background = value;
+                                        this.props.updateOptions(this.props.options);
+                                    }}
+                                >
+                                    <option value="default">{this.props.translations[this.props.language].defaultSky}</option>
+                                    <option value="sky">{this.props.translations[this.props.language].podiumPhysicalSky1}</option>
+                                    <option value="sky2">{this.props.translations[this.props.language].podiumPhysicalSky2}</option>
+                                    <option value="hdr">HDRI/IBL</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Label style={{ fontWeight: 600, marginLeft: 10 }}>
+                                    {this.props.translations[this.props.language].sunSkyBrightness}:
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Label
+                                    style={{ marginLeft: 10, marginRight: 5 }}
+                                >
+                                    {this.props.translations[this.props.language].intensity}
+                                </Form.Label>
+                                <Form.Control
+                                    ref={this.intensityRef}
+                                    type="range"
+                                    min={0}
+                                    max={100}
+                                    style={{ width: 200 }}
+                                    defaultValue={this.props.options.environment_brightness}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        this.props.options.environment_brightness = value;
+                                        this.props.updateOptions(this.props.options);
+                                    }}
+                                ></Form.Control>
+                                <Form.Label style={{ marginLeft: 5 }}>
+                                    {this.props.options.environment_brightness}
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row} style={{ marginBottom: 0 }}>
+                                <Form.Label style={{ marginLeft: 10, marginRight: 5 }}>
+                                    {this.props.translations[this.props.language].exposure}
+                                </Form.Label>
+                                <Form.Control
+                                    ref={this.exposureRef}
+                                    type="range"
+                                    min={0}
+                                    max={100}
+                                    style={{ width: 200 }}
+                                    defaultValue={this.props.options.environment_contrast}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        this.props.options.environment_contrast = value;
+                                        this.props.updateOptions(this.props.options);
+                                    }}
+                                ></Form.Control>
+                                <Form.Label style={{ marginLeft: 5 }}>
+                                    {this.props.options.environment_contrast}
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Col>
+                                    <Button
+                                        variant="light"
+                                        style={{ float: 'right' }}
+                                        onClick={(e) => {
+                                            this.props.options.environment_brightness = 50;
+                                            this.props.options.environment_contrast = 50;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    >
+                                        {this.props.translations[this.props.language].reset}
+                                    </Button>
+                                </Col>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group as={Row} style={{ marginTop: 10, marginBottom: 5 }}>
+                                <Form.Label style={{ fontWeight: 600, marginLeft: 10 }}>
+                                    {this.props.translations[this.props.language].renderingMode}:
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Control as="select"
+                                    size="sm"
+                                    style={{ marginLeft: 10, width: 300 }}
+                                    defaultValue={this.props.options.rendering_mode}
+                                    onClick={(e) => {
+                                        const value = e.target.value;
+                                        this.props.options.rendering_mode = value;
+                                        this.props.updateOptions(this.props.options);
+                                    }}
+                                >
+                                    <option value="fast">{this.props.translations[this.props.language].fast}</option>
+                                    <option value="slow">{this.props.translations[this.props.language].slow}</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group as={Row} style={{ marginBottom: 5 }}>
+                                <Form.Label style={{ fontWeight: 600, marginLeft: 10 }}>
+                                    {this.props.translations[this.props.language].options}:
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Col>
+                                    <Form.Check
+                                        ref={this.softOmniLightsRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].softOmniLights}
+                                        checked={this.props.options.environment_spherical_point_lights}
+                                        onChange={(e) => {
+                                            this.props.options.environment_spherical_point_lights = e.target.checked;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                    <Form.Check
+                                        ref={this.causticRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].caustics}
+                                        checked={this.props.options.environment_caustic}
+                                        onChange={(e) => {
+                                            this.props.options.environment_caustic = e.target.checked;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                    <Form.Check
+                                        ref={this.clayRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].clay}
+                                        checked={this.props.options.environment_clay}
+                                        onChange={(e) => {
+                                            this.props.options.environment_clay = e.target.checked;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                    <Form.Check
+                                        ref={this.outputInfoRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].informationBar}
+                                        checked={this.props.options.output_info}
+                                        onChange={(e) => {
+                                            this.props.options.output_info = e.target.checked;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                    <Form.Check
+                                        ref={this.translucentColorRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].translucentColor}
+                                        checked={this.props.options.environment_translucent_color}
+                                        onChange={(e) => {
+                                            this.props.options.environment_translucent_color = e.target.checked;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                    <Form.Check
+                                        ref={this.automaticMaterialsRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].automaticMaterials}
+                                        checked={this.props.options.environment_automatic_materials}
+                                        onChange={(e) => {
+                                            this.props.options.environment_automatic_materials = e.target.checked;
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                </Col>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Container>
             </React.Fragment>
         )
     }

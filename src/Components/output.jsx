@@ -53,9 +53,11 @@ class Output extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <Form.Label style={{ fontWeight: 600 }}>
-                                {this.props.translations[this.props.language].imageSize}
-                            </Form.Label>
+                            <Form.Group as={Row} style={{marginTop: 10, marginLeft: 0, marginBottom: 5}}>
+                                <Form.Label style={{ fontWeight: 600 }}>
+                                    {this.props.translations[this.props.language].imageSize}
+                                </Form.Label>
+                            </Form.Group>
                             <Form.Group>
                                 <Form.Check
                                     type="radio"
@@ -105,6 +107,7 @@ class Output extends React.Component {
                                 <Col sm="10">
                                     <Form.Control as="select"
                                         ref={this.dimensionsRef}
+                                        size="sm"
                                         disabled={this.props.options.output_dimensions !== "fixed"}
                                         defaultValue={this.getImageSizeValue()}
                                         onChange={(e) => {
@@ -136,6 +139,7 @@ class Output extends React.Component {
                                     <Form.Control
                                         ref={this.widthRef}
                                         type="number"
+                                        size="sm"
                                         disabled={this.props.options.output_dimensions === "viewport"}
                                         defaultValue={this.props.output_dimensions_width}
                                         onChange={(e) => {
@@ -156,6 +160,7 @@ class Output extends React.Component {
                                     <Form.Control
                                         ref={this.heightRef}
                                         type="number"
+                                        size="sm"
                                         disabled={this.props.options.output_dimensions !== "fixed"}
                                         defaultValue={this.props.output_dimensions_height}
                                         onChange={(e) => {
@@ -168,7 +173,7 @@ class Output extends React.Component {
                             </Form.Group>
                         </Col>
                         <Col>
-                            <Form.Group as={Row} style={{ marginBottom: 5 }}>
+                            <Form.Group as={Row} style={{ marginTop: 10, marginBottom: 5 }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
                                     {this.props.translations[this.props.language].imageFormat}
                                 </Form.Label>
@@ -267,6 +272,7 @@ class Output extends React.Component {
                                 <Col>
                                     <Form.Control
                                         ref={this.outputDirectoryRef}
+                                        size="sm"
                                         disabled={this.props.options.output_mode === "model"}
                                         placeholder="Save location"
                                         onChange={(e) => {
