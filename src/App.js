@@ -96,7 +96,12 @@ class App extends React.Component {
     render() {
         return this.state.loaded ? (
             <React.Fragment>
-                <Container style={{margin: 10}}>
+                <Container style={{
+                    width: 540,
+                    height: 515,
+                    margin: 0,
+                    padding: 0
+                }}>
                     <Presets
                         translations={this.state.translations}
                         language={this.state.language}
@@ -107,14 +112,16 @@ class App extends React.Component {
                     />
                     <Nav variant="tabs" defaultActiveKey="output">
                         <Nav.Item>
-                            <Nav.Link eventKey="output"
+                            <Nav.Link
+                                eventKey="output"
                                 onClick={(e) => { this.setState({ displayTab: "output" }) }}
                             >
                                 {this.state.translations[this.state.language].output}
                             </Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link eventKey="environment"
+                            <Nav.Link 
+                                eventKey="environment"
                                 onClick={(e) => { this.setState({ displayTab: "environment" }) }}
                             >
                                 {this.state.translations[this.state.language].environment}
@@ -130,54 +137,54 @@ class App extends React.Component {
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>
-                    <div>
-                        {
-                            this.state.displayTab === "output" ?
-                                <Output
-                                    language={this.state.language}
-                                    translations={this.state.translations}
-                                    dimensions={this.state.dimensions}
-                                    options={this.state.options}
-                                    updateOptions={this.updateOptions}
-                                    getOutputDirectory={this.GetOutputDirectory}
-                                /> :
-                                null
-                        }
-                        {
-                            this.state.displayTab === "environment" ?
-                                <Environment
-                                    language={this.state.language}
-                                    translations={this.state.translations}
-                                    options={this.state.options}
-                                    updateOptions={this.updateOptions}
-                                /> :
-                                null
-                        }
-                        {
-                            this.state.displayTab === "hdr" ?
-                                <HDR
-                                    language={this.state.language}
-                                    translations={this.state.translations}
-                                    hdrOptions={this.state.hdrOptions}
-                                    options={this.state.options}
-                                    updateOptions={this.updateOptions}
-                                /> :
-                                null
-                        }
-                    </div>
-                    <div style={{ float: 'right' }}>
-                        <Button
-                            variant="light"
-                            style={{margin: 5}}
-                            onClick={this.cancel}>
-                            {this.state.translations[this.state.language].cancel}
-                        </Button>
-                        <Button
-                            variant="light"
-                            style={{margin: 5}}
-                            onClick={this.save}>
-                            {this.state.translations[this.state.language].save}
-                        </Button>
+                    {
+                        this.state.displayTab === "output" ?
+                            <Output
+                                language={this.state.language}
+                                translations={this.state.translations}
+                                dimensions={this.state.dimensions}
+                                options={this.state.options}
+                                updateOptions={this.updateOptions}
+                                getOutputDirectory={this.GetOutputDirectory}
+                            /> :
+                            null
+                    }
+                    {
+                        this.state.displayTab === "environment" ?
+                            <Environment
+                                language={this.state.language}
+                                translations={this.state.translations}
+                                options={this.state.options}
+                                updateOptions={this.updateOptions}
+                            /> :
+                            null
+                    }
+                    {
+                        this.state.displayTab === "hdr" ?
+                            <HDR
+                                language={this.state.language}
+                                translations={this.state.translations}
+                                hdrOptions={this.state.hdrOptions}
+                                options={this.state.options}
+                                updateOptions={this.updateOptions}
+                            /> :
+                            null
+                    }
+                    <div style={{ position: 'absolute', bottom: 5, right: 5 }}>
+                        <div>
+                            <Button
+                                variant="light"
+                                style={{ margin: 5 }}
+                                onClick={this.cancel}>
+                                {this.state.translations[this.state.language].cancel}
+                            </Button>
+                            <Button
+                                variant="light"
+                                style={{ margin: 5 }}
+                                onClick={this.save}>
+                                {this.state.translations[this.state.language].save}
+                            </Button>
+                        </div>
                     </div>
                 </Container>
             </React.Fragment>
@@ -188,7 +195,7 @@ class App extends React.Component {
         this.setState({
             options: { ...options }
         }, () => {
-            console.log(this.state.options);
+            // console.log(this.state.options);
         });
     }
 

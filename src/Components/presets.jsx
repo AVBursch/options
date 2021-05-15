@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 class Presets extends React.Component {
     constructor(props) {
@@ -16,12 +16,14 @@ class Presets extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label column sm="3" style={{ fontWeight: 600 }}>
-                            {this.props.translations[this.props.language].presetName}
-                        </Form.Label>
-                        <Col sm="9">
+                <Container>
+                    <Row style={{marginTop: 5}}>
+                        <Col xs="3">
+                            <Form.Label style={{ fontWeight: 600 }}>
+                                {this.props.translations[this.props.language].presetName}
+                            </Form.Label>
+                        </Col>
+                        <Col xs="9">
                             <Form.Control as="select"
                                 defaultValue={this.props.options.preset}
                                 size="sm"
@@ -34,11 +36,15 @@ class Presets extends React.Component {
                                 {
                                     this.props.presets.map((preset, index) => {
                                         return (
-                                            <option value={preset}>{preset}</option>
+                                            <option key={index} value={preset}>{preset}</option>
                                         )
                                     })
                                 }
                             </Form.Control>
+                        </Col>
+                    </Row>
+                    <Form.Group as={Row} style={{marginBottom: 0}}>
+                        <Col>
                             <Button
                                 variant="link"
                                 style={{ float: "right" }}
@@ -48,7 +54,7 @@ class Presets extends React.Component {
                             </Button>
                         </Col>
                     </Form.Group>
-                </Form>
+                </Container>
             </React.Fragment >
         )
     }

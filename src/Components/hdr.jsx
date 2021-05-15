@@ -23,8 +23,8 @@ class HDR extends React.Component {
 
     componentDidMount() {
         if (this.props.options.hdr_texture !== "") {
-            if(!window["debug"]) {
-                this.setBackground();
+            if (!window["debug"]) {
+                this.GetCamera();
             }
         }
     }
@@ -41,120 +41,168 @@ class HDR extends React.Component {
     }
 
     setBackground = () => {
-        this.hdrPreview = new HDRPreview(
-            this.props.hdrOptions.dir + "/",
-            this.props.options.hdr_texture,
-            175,
-            this.containerRef.current
-        );
-        this.hdrPreview.update({
-            exposure: this.props.options.hdr_exposure,
-            longitude: this.props.options.hdr_rotation
-        });
+        if (this.containerRef.current) {
+            this.hdrPreview = new HDRPreview(
+                this.props.hdrOptions.dir + "/",
+                this.props.options.hdr_texture,
+                175,
+                this.containerRef.current
+            );
+            this.hdrPreview.update({
+                exposure: this.props.options.hdr_exposure,
+                longitude: this.props.options.hdr_rotation
+            });
+        }
         setTimeout(() => {
             this.GetCamera();
         }, 1000 / 30);
     }
 
     updateCamera = (x, y, z) => {
-        let vector3 = new THREE.Vector3(x, z, y); // switch y and z to convert coordinates systems
-        let lng = -Math.atan2(-vector3.z, -vector3.x) - Math.PI / 2;
-        if (lng < -Math.PI) {
-            lng += Math.PI * 2;
+        if (this.hdrPreview === null) {
+            this.setBackground();
+        } else {
+            let vector3 = new THREE.Vector3(x, z, y); // switch y and z to convert coordinates systems
+            let lng = -Math.atan2(-vector3.z, -vector3.x) - Math.PI / 2;
+            if (lng < -Math.PI) {
+                lng += Math.PI * 2;
+            }
+            const p = new THREE.Vector3(vector3.x, 0, vector3.z);
+            p.normalize();
+
+            let lat = Math.acos(p.dot(vector3));
+            if (vector3.y < 0) {
+                lat *= -1;
+            }
+
+            const longitude_offset = (window["longitude_offset"] = this.props.options.hdr_rotation);
+            // add 180 to convert coordinate systems
+            const longitude = (window["longitude"] = (lng * 180) / Math.PI + 180 + longitude_offset);
+            const latitude = (window["latitude"] = (lat * 180) / Math.PI);
+
+            this.hdrPreview.update({
+                longitude: longitude,
+                latitude: latitude
+            });
+
+            setTimeout(() => {
+                this.GetCamera();
+            }, 1000 / 30);
         }
-        const p = new THREE.Vector3(vector3.x, 0, vector3.z);
-        p.normalize();
-
-        let lat = Math.acos(p.dot(vector3));
-        if (vector3.y < 0) {
-            lat *= -1;
-        }
-
-        const longitude_offset = (window["longitude_offset"] = this.props.options.hdr_rotation);
-        // add 180 to convert coordinate systems
-        const longitude = (window["longitude"] = (lng * 180) / Math.PI + 180 + longitude_offset);
-        const latitude = (window["latitude"] = (lat * 180) / Math.PI);
-
-        this.hdrPreview.update({
-            longitude: longitude,
-            latitude: latitude
-        });
-
-        setTimeout(() => {
-            this.GetCamera();
-        }, 1000 / 30);
     }
 
     render() {
         return (
             <React.Fragment>
-                <div style={{ backgroundColor: "white" }}>
-                    <label><b>{this.props.translations[this.props.language].texture}:</b></label>
-                    <br />
-                    <select
-                        defaultValue={this.props.options.hdr_texture}
-                        onChange={(e) => {
-                            const value = e.target.value;
-                            this.props.options.hdr_texture = value;
-                            this.props.updateOptions(this.props.options);
-                            this.setBackground();
-                        }}
-                    >
-                        {
-                            this.props.hdrOptions.names.map((name, index) => {
-                                return (<option key={index} value={name}>{name}</option>)
-                            })
-                        }
-                    </select>
-                    <div ref={this.containerRef}>
-                        select a texture
-                    </div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style={{ width: 250 }}>
-                                    <label>{this.props.translations[this.props.language].rotation}:</label>
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max="360"
-                                        step="1"
-                                        defaultValue={this.props.options.hdr_rotation}
-                                        onChange={(e) => {
-                                            const value = +e.target.value;
-                                            this.props.options.hdr_rotation = value;
-                                            this.props.updateOptions(this.props.options);
-                                            window["longitude_offset"] = value;
-                                            const lookVector = window["lookVector"];
-                                            this.updateCamera(lookVector.x, lookVector.y, lookVector.z);
-                                        }}
-                                    />
-                                    <label>{this.props.options.hdr_rotation}</label>
-                                </td>
-
-                                <td style={{ width: 250 }}>
-                                    <label>{this.props.translations[this.props.language].exposure}</label>
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max="3.0"
-                                        step="0.1"
-                                        defaultValue={this.props.options.hdr_exposure}
-                                        onChange={(e) => {
-                                            const value = +e.target.value;
-                                            this.props.options.hdr_exposure = value;
-                                            this.props.updateOptions(this.props.options);
-                                            this.hdrPreview.update({
-                                                exposure: value
-                                            });
-                                        }}
-                                    />
-                                    <label>{this.props.options.hdr_exposure}</label>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <Container>
+                    <Row>
+                        <Col>
+                            <Form.Group as={Row}
+                                style={{
+                                    marginTop: 5,
+                                    marginLeft: 0,
+                                    marginBottom: 0
+                                }}>
+                                <Form.Label style={{ fontWeight: 600 }}>
+                                    {this.props.translations[this.props.language].texture}:
+                                </Form.Label>
+                            </Form.Group>
+                            <Form.Group as={Row}>
+                                <Form.Control as="select"
+                                    size="sm"
+                                    style={{ marginLeft: 10, marginRight: 10 }}
+                                    defaultValue={this.props.options.hdr_texture}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        this.props.options.hdr_texture = value;
+                                        this.props.updateOptions(this.props.options);
+                                        this.setBackground();
+                                    }}
+                                >
+                                    {
+                                        this.props.hdrOptions.names.map((name, index) => {
+                                            return (<option key={index} value={name}>{name}</option>)
+                                        })
+                                    }
+                                </Form.Control>
+                            </Form.Group>
+                            <Row style={{marginTop: 25, marginBottom: 25}}>
+                                <Col align="center">
+                                    <div
+                                        style={{ backgroundColor: '#111', color: '#fff', width: 350, height: 175 }}
+                                        ref={this.containerRef}
+                                    >
+                                        select a texture
+                                    </div>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Form.Group as={Row}
+                                        style={{
+                                            marginTop: 5,
+                                            marginLeft: 0,
+                                            marginBottom: 0
+                                        }}>
+                                        <Form.Label>
+                                            {this.props.translations[this.props.language].rotation}:
+                                        </Form.Label>
+                                        <Form.Control
+                                            type="range"
+                                            min="0"
+                                            max="360"
+                                            step="1"
+                                            style={{ width: 150, marginLeft: 5, marginRight: 5 }}
+                                            defaultValue={this.props.options.hdr_rotation}
+                                            onChange={(e) => {
+                                                const value = +e.target.value;
+                                                this.props.options.hdr_rotation = value;
+                                                this.props.updateOptions(this.props.options);
+                                                window["longitude_offset"] = value;
+                                                const lookVector = window["lookVector"];
+                                                this.updateCamera(lookVector.x, lookVector.y, lookVector.z);
+                                            }}
+                                        ></Form.Control>
+                                        <Form.Label>
+                                            {this.props.options.hdr_rotation}
+                                        </Form.Label>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group as={Row}
+                                style={{ 
+                                    marginTop: 5, 
+                                    marginLeft: 0, 
+                                    marginBottom: 0
+                                }}>
+                                        <Form.Label>
+                                            {this.props.translations[this.props.language].exposure}
+                                        </Form.Label>
+                                        <Form.Control
+                                            type="range"
+                                            min="0"
+                                            max="3.0"
+                                            step="0.1"
+                                            style={{ width: 150, marginLeft: 5, marginRight: 5 }}
+                                            defaultValue={this.props.options.hdr_exposure}
+                                            onChange={(e) => {
+                                                const value = +e.target.value;
+                                                this.props.options.hdr_exposure = value;
+                                                this.props.updateOptions(this.props.options);
+                                                this.hdrPreview.update({
+                                                    exposure: value
+                                                });
+                                            }}
+                                        ></Form.Control>
+                                        <Form.Label>
+                                            {this.props.options.hdr_exposure}
+                                        </Form.Label>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
             </React.Fragment>
         )
     }

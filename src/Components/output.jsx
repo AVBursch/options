@@ -53,7 +53,12 @@ class Output extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <Form.Group as={Row} style={{marginTop: 10, marginLeft: 0, marginBottom: 5}}>
+                            <Form.Group as={Row} 
+                                style={{ 
+                                    marginTop: 5, 
+                                    marginLeft: 0, 
+                                    marginBottom: 0
+                                }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
                                     {this.props.translations[this.props.language].imageSize}
                                 </Form.Label>
@@ -101,10 +106,10 @@ class Output extends React.Component {
                                 ></Form.Check>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Label column sm="2">
+                                <Form.Label column xs="3">
                                     {this.props.translations[this.props.language].size}
                                 </Form.Label>
-                                <Col sm="10">
+                                <Col xs="9">
                                     <Form.Control as="select"
                                         ref={this.dimensionsRef}
                                         size="sm"
@@ -132,10 +137,10 @@ class Output extends React.Component {
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Label column sm="2">
+                                <Form.Label column xs="3">
                                     {this.props.translations[this.props.language].width}
                                 </Form.Label>
-                                <Col sm="10">
+                                <Col xs="9">
                                     <Form.Control
                                         ref={this.widthRef}
                                         type="number"
@@ -153,10 +158,10 @@ class Output extends React.Component {
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Label column sm="2">
+                                <Form.Label column xs="3">
                                     {this.props.translations[this.props.language].height}
                                 </Form.Label>
-                                <Col sm="10">
+                                <Col xs="9">
                                     <Form.Control
                                         ref={this.heightRef}
                                         type="number"
@@ -268,22 +273,21 @@ class Output extends React.Component {
                                     }}
                                 ></Form.Check>
                             </Form.Group>
-                            <Form.Group as={Row} style={{marginBottom: 5}}>
-                                <Col>
-                                    <Form.Control
-                                        ref={this.outputDirectoryRef}
-                                        size="sm"
-                                        disabled={this.props.options.output_mode === "model"}
-                                        placeholder="Save location"
-                                        onChange={(e) => {
-                                            const value = e.target.value;
-                                            this.props.options.output_directory = value;
-                                            this.props.updateOptions(this.props.options);
-                                        }}
-                                    ></Form.Control>
-                                </Col>
+                            <Form.Group as={Row} style={{ marginBottom: 5 }}>
+                                <Form.Control
+                                    ref={this.outputDirectoryRef}
+                                    size="sm"
+                                    style={{marginRight: 10}}
+                                    disabled={this.props.options.output_mode === "model"}
+                                    placeholder="Save location"
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        this.props.options.output_directory = value;
+                                        this.props.updateOptions(this.props.options);
+                                    }}
+                                ></Form.Control>
                             </Form.Group>
-                            <Form.Group as={Row}>
+                            <Form.Group as={Row} style={{marginRight: -20}}>
                                 <Col>
                                     <Button
                                         variant="light"
