@@ -126,7 +126,7 @@ class HDR extends React.Component {
                                     }
                                 </Form.Control>
                             </Form.Group>
-                            <Row style={{marginTop: 25, marginBottom: 25}}>
+                            <Row style={{ marginTop: 10, marginBottom: 10 }}>
                                 <Col align="center">
                                     <div
                                         style={{ backgroundColor: '#111', color: '#fff', width: 350, height: 175 }}
@@ -137,68 +137,60 @@ class HDR extends React.Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col>
-                                    <Form.Group as={Row}
-                                        style={{
-                                            marginTop: 5,
-                                            marginLeft: 0,
-                                            marginBottom: 0
-                                        }}>
-                                        <Form.Label>
-                                            {this.props.translations[this.props.language].rotation}:
-                                        </Form.Label>
-                                        <Form.Control
-                                            type="range"
-                                            min="0"
-                                            max="360"
-                                            step="1"
-                                            style={{ width: 150, marginLeft: 5, marginRight: 5 }}
-                                            defaultValue={this.props.options.hdr_rotation}
-                                            onChange={(e) => {
-                                                const value = +e.target.value;
-                                                this.props.options.hdr_rotation = value;
-                                                this.props.updateOptions(this.props.options);
-                                                window["longitude_offset"] = value;
-                                                const lookVector = window["lookVector"];
-                                                this.updateCamera(lookVector.x, lookVector.y, lookVector.z);
-                                            }}
-                                        ></Form.Control>
-                                        <Form.Label>
-                                            {this.props.options.hdr_rotation}
-                                        </Form.Label>
-                                    </Form.Group>
-                                </Col>
-                                <Col>
-                                    <Form.Group as={Row}
-                                style={{ 
-                                    marginTop: 5, 
-                                    marginLeft: 0, 
-                                    marginBottom: 0
-                                }}>
-                                        <Form.Label>
-                                            {this.props.translations[this.props.language].exposure}
-                                        </Form.Label>
-                                        <Form.Control
-                                            type="range"
-                                            min="0"
-                                            max="3.0"
-                                            step="0.1"
-                                            style={{ width: 150, marginLeft: 5, marginRight: 5 }}
-                                            defaultValue={this.props.options.hdr_exposure}
-                                            onChange={(e) => {
-                                                const value = +e.target.value;
-                                                this.props.options.hdr_exposure = value;
-                                                this.props.updateOptions(this.props.options);
-                                                this.hdrPreview.update({
-                                                    exposure: value
-                                                });
-                                            }}
-                                        ></Form.Control>
-                                        <Form.Label>
-                                            {this.props.options.hdr_exposure}
-                                        </Form.Label>
-                                    </Form.Group>
-                                </Col>
+                                <Form.Label 
+                                    column="md"
+                                >
+                                    {this.props.translations[this.props.language].rotation}:
+                                </Form.Label>
+                                <Form.Control
+                                    column="md"
+                                    style={{ width: 100, marginLeft: 20 }}
+                                    type="range"
+                                    min="0"
+                                    max="360"
+                                    step="1"
+                                    defaultValue={this.props.options.hdr_rotation}
+                                    onChange={(e) => {
+                                        const value = +e.target.value;
+                                        this.props.options.hdr_rotation = value;
+                                        this.props.updateOptions(this.props.options);
+                                        window["longitude_offset"] = value;
+                                        const lookVector = window["lookVector"];
+                                        this.updateCamera(lookVector.x, lookVector.y, lookVector.z);
+                                    }}
+                                ></Form.Control>
+                                <Form.Label 
+                                    column="md"
+                                >
+                                    {this.props.options.hdr_rotation}
+                                </Form.Label>
+                                <Form.Label 
+                                    column="md"
+                                >
+                                    {this.props.translations[this.props.language].exposure}
+                                </Form.Label>
+                                <Form.Control
+                                    column="md"
+                                    style={{ width: 100, marginLeft: 20 }}
+                                    type="range"
+                                    min="0"
+                                    max="3.0"
+                                    step="0.1"
+                                    defaultValue={this.props.options.hdr_exposure}
+                                    onChange={(e) => {
+                                        const value = +e.target.value;
+                                        this.props.options.hdr_exposure = value;
+                                        this.props.updateOptions(this.props.options);
+                                        this.hdrPreview.update({
+                                            exposure: value
+                                        });
+                                    }}
+                                ></Form.Control>
+                                <Form.Label
+                                    column="md"
+                                >
+                                    {this.props.options.hdr_exposure}
+                                </Form.Label>
                             </Row>
                         </Col>
                     </Row>

@@ -97,8 +97,8 @@ class App extends React.Component {
         return this.state.loaded ? (
             <React.Fragment>
                 <Container style={{
-                    width: 540,
-                    height: 515,
+                    width: 500,
+                    height: 475,
                     margin: 0,
                     padding: 0
                 }}>
@@ -110,7 +110,7 @@ class App extends React.Component {
                         options={this.state.options}
                         updateOptions={this.updateOptions}
                     />
-                    <Nav variant="tabs" defaultActiveKey="output">
+                    <Nav variant="tabs" defaultActiveKey="output" style={{marginTop: -10}}>
                         <Nav.Item>
                             <Nav.Link
                                 eventKey="output"
