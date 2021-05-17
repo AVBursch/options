@@ -8,7 +8,7 @@ import { en, ja, tw } from './models/translations';
 import { Button, Container, Nav, Col, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 /*global sketchup*/
-window["debug"] = true;
+window["debug"] = false;
 
 class App extends React.Component {
     constructor(props) {
@@ -210,11 +210,11 @@ class App extends React.Component {
         return false;
     }
 
-    save() {
-        this.Save(JSON.stringify(this.options));
+    save = () => {
+        this.Save(JSON.stringify(this.state.options));
     }
 
-    reset() {
+    reset = () => {
         this.setState({
             options: {
                 geometry_caching: false,
@@ -249,7 +249,7 @@ class App extends React.Component {
         });
     }
 
-    cancel() {
+    cancel = () => {
         this.Cancel();
     }
 
