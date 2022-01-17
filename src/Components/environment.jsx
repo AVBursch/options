@@ -48,17 +48,17 @@ class Environment extends React.Component {
                     <Row>
                         <Col>
                             <Form.Group as={Row}
-                                style={{ 
-                                    marginTop: 5, 
-                                    marginLeft: 0, 
+                                style={{
+                                    marginTop: 5,
+                                    marginLeft: 0,
                                     marginBottom: 0
                                 }}>
-                                <Form.Label style={{ fontWeight: 600}}>
+                                <Form.Label style={{ fontWeight: 600 }}>
                                     {this.props.translations[this.props.language].background}:
                                 </Form.Label>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Control as="select"
+                                <select class="form-select form-select-sm"
                                     size="sm"
                                     style={{ marginLeft: 10, width: 300 }}
                                     defaultValue={this.props.options.environment_background}
@@ -72,48 +72,50 @@ class Environment extends React.Component {
                                     <option value="sky">{this.props.translations[this.props.language].podiumPhysicalSky1}</option>
                                     <option value="sky2">{this.props.translations[this.props.language].podiumPhysicalSky2}</option>
                                     <option value="hdr">HDRI/IBL</option>
-                                </Form.Control>
+                                </select>
                             </Form.Group>
                             <Form.Group as={Row}
-                                style={{  
-                                    marginLeft: 0, 
-                                    marginBottom: 0
+                                style={{
+                                    marginLeft: 0,
+                                    marginBottom: 0,
+                                    marginTop: 10
                                 }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
                                     {this.props.translations[this.props.language].sunSkyBrightness}:
                                 </Form.Label>
                             </Form.Group>
                             <Form.Group as={Row}
-                                style={{ 
-                                    marginLeft: 0, 
+                                style={{
+                                    marginLeft: 0,
                                     marginBottom: 0
                                 }}>
-                                <Form.Label>
+                                <Form.Label class="col">
                                     {this.props.translations[this.props.language].intensity}
                                 </Form.Label>
                                 <Form.Control
                                     ref={this.intensityRef}
                                     type="range"
                                     min={0}
-                                    max={100}
+                                    max={100} 
+                                    class="col"
                                     style={{ width: 150, marginLeft: 5, marginRight: 5 }}
                                     defaultValue={this.props.options.environment_brightness}
                                     onChange={(e) => {
                                         const value = e.target.value;
-                                        this.props.options.environment_brightness = value;
+                                        this.props.options.environment_brightness = +value;
                                         this.props.updateOptions(this.props.options);
                                     }}
                                 ></Form.Control>
-                                <Form.Label style={{ marginLeft: 5 }}>
+                                <Form.Label style={{ marginLeft: 5 }} class="col">
                                     {this.props.options.environment_brightness}
                                 </Form.Label>
                             </Form.Group>
                             <Form.Group as={Row}
-                                style={{ 
-                                    marginLeft: 0, 
+                                style={{
+                                    marginLeft: 0,
                                     marginBottom: 0
                                 }}>
-                                <Form.Label>
+                                <Form.Label  class="col">
                                     {this.props.translations[this.props.language].exposure}
                                 </Form.Label>
                                 <Form.Control
@@ -121,21 +123,22 @@ class Environment extends React.Component {
                                     type="range"
                                     min={0}
                                     max={100}
-                                    style={{ width:150, marginLeft: 5, marginRight: 5 }}
+                                    class="col"
+                                    style={{ width: 150, marginLeft: 5, marginRight: 5 }}
                                     defaultValue={this.props.options.environment_contrast}
                                     onChange={(e) => {
                                         const value = e.target.value;
-                                        this.props.options.environment_contrast = value;
+                                        this.props.options.environment_contrast = +value;
                                         this.props.updateOptions(this.props.options);
                                     }}
                                 ></Form.Control>
-                                <Form.Label>
+                                <Form.Label class="col">
                                     {this.props.options.environment_contrast}
                                 </Form.Label>
                             </Form.Group>
                             <Form.Group as={Row}
-                                style={{ 
-                                    marginLeft: 0, 
+                                style={{
+                                    marginLeft: 0,
                                     marginBottom: 0,
                                     marginRight: -30
                                 }}>
@@ -156,9 +159,9 @@ class Environment extends React.Component {
                         </Col>
                         <Col>
                             <Form.Group as={Row}
-                                style={{ 
-                                    marginTop: 5, 
-                                    marginLeft: 0, 
+                                style={{
+                                    marginTop: 5,
+                                    marginLeft: 0,
                                     marginBottom: 0
                                 }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
@@ -166,8 +169,9 @@ class Environment extends React.Component {
                                 </Form.Label>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Control as="select"
+                                <select
                                     size="sm"
+                                    class="form-select form-select-sm"
                                     style={{ marginLeft: 10, marginRight: 10 }}
                                     defaultValue={this.props.options.rendering_mode}
                                     onClick={(e) => {
@@ -178,12 +182,13 @@ class Environment extends React.Component {
                                 >
                                     <option value="fast">{this.props.translations[this.props.language].fast}</option>
                                     <option value="slow">{this.props.translations[this.props.language].slow}</option>
-                                </Form.Control>
+                                </select>
                             </Form.Group>
                             <Form.Group as={Row}
-                                style={{ 
-                                    marginLeft: 0, 
-                                    marginBottom: 0
+                                style={{
+                                    marginLeft: 0,
+                                    marginBottom: 0,
+                                    marginTop: 10
                                 }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
                                     {this.props.translations[this.props.language].options}:

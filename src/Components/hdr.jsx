@@ -108,8 +108,9 @@ class HDR extends React.Component {
                                 </Form.Label>
                             </Form.Group>
                             <Form.Group as={Row}>
-                                <Form.Control as="select"
+                                <select
                                     size="sm"
+                                    class="form-select form-select-sm"
                                     style={{ marginLeft: 10, marginRight: 10 }}
                                     defaultValue={this.props.options.hdr_texture}
                                     onChange={(e) => {
@@ -124,7 +125,7 @@ class HDR extends React.Component {
                                             return (<option key={index} value={name}>{name}</option>)
                                         })
                                     }
-                                </Form.Control>
+                                </select>
                             </Form.Group>
                             <Row style={{ marginTop: 10, marginBottom: 10 }}>
                                 <Col align="center">
@@ -144,7 +145,7 @@ class HDR extends React.Component {
                                 </Form.Label>
                                 <Form.Control
                                     column="md"
-                                    style={{ width: 100, marginLeft: 20 }}
+                                    style={{ width: 100, marginLeft: 10 }}
                                     type="range"
                                     min="0"
                                     max="360"
@@ -171,7 +172,7 @@ class HDR extends React.Component {
                                 </Form.Label>
                                 <Form.Control
                                     column="md"
-                                    style={{ width: 100, marginLeft: 20 }}
+                                    style={{ width: 100, marginLeft: 10 }}
                                     type="range"
                                     min="0"
                                     max="3.0"

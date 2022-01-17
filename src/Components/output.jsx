@@ -53,10 +53,10 @@ class Output extends React.Component {
                 <Container>
                     <Row>
                         <Col>
-                            <Form.Group as={Row} 
-                                style={{ 
-                                    marginTop: 5, 
-                                    marginLeft: 0, 
+                            <Form.Group as={Row}
+                                style={{
+                                    marginTop: 5,
+                                    marginLeft: 0,
                                     marginBottom: 0
                                 }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
@@ -105,14 +105,15 @@ class Output extends React.Component {
                                     }}
                                 ></Form.Check>
                             </Form.Group>
-                            <Form.Group as={Row}>
+                            <Form.Group as={Row} style={{marginTop: 10}}>
                                 <Form.Label column xs="3">
                                     {this.props.translations[this.props.language].size}
                                 </Form.Label>
                                 <Col xs="9">
-                                    <Form.Control as="select"
+                                    <select
                                         ref={this.dimensionsRef}
                                         size="sm"
+                                        class="form-select form-select-sm"
                                         disabled={this.props.options.output_dimensions !== "fixed"}
                                         defaultValue={this.getImageSizeValue()}
                                         onChange={(e) => {
@@ -133,7 +134,7 @@ class Output extends React.Component {
                                                 return (<option key={index} value={dimension.value}>{dimension.description}</option>)
                                             })
                                         }
-                                    </Form.Control>
+                                    </select>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -183,62 +184,75 @@ class Output extends React.Component {
                                     {this.props.translations[this.props.language].imageFormat}
                                 </Form.Label>
                             </Form.Group>
-                            <Form.Group as={Row}>
-                                <Form.Check
-                                    type="radio"
-                                    name="imageFormat"
-                                    value="png"
-                                    label=".png"
-                                    style={{ marginRight: 5 }}
-                                    checked={this.props.options.output_format === "png" || this.props.options.output_format === "pnga" ? true : false}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            this.props.options.output_format = this.transparentRef.current.checked ? "pnga" : "png";
-                                            this.props.updateOptions(this.props.options);
-                                        }
-                                    }}
-                                ></Form.Check>
-                                <Form.Check
-                                    type="radio"
-                                    name="imageFormat"
-                                    value="jpg"
-                                    label=".jpg"
-                                    style={{ marginRight: 5 }}
-                                    checked={this.props.options.output_format === "jpg" ? true : false}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            this.props.options.output_format = "jpg";
-                                            this.props.updateOptions(this.props.options);
-                                        }
-                                    }}
-                                ></Form.Check>
-                                <Form.Check
-                                    type="radio"
-                                    name="imageFormat"
-                                    value="hdr"
-                                    label=".hdr"
-                                    checked={this.props.options.output_format === "hdr" ? true : false}
-                                    onChange={(e) => {
-                                        if (e.target.checked) {
-                                            this.props.options.output_format = "hdr";
-                                            this.props.updateOptions(this.props.options);
-                                        }
-                                    }}
-                                ></Form.Check>
+                            <Form.Group as={Row} style={{marginLeft: '-25px'}}>
+                                <Col>
+                                    <input
+                                        type="radio"
+                                        name="imageFormat"
+                                        value="png"
+                                        class="form-check-input"
+                                        style={{ marginRight: 5 }}
+                                        checked={this.props.options.output_format === "png" || this.props.options.output_format === "pnga" ? true : false}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                this.props.options.output_format = this.transparentRef.current.checked ? "pnga" : "png";
+                                                this.props.updateOptions(this.props.options);
+                                            }
+                                        }}
+                                    />
+                                    <label class="form-check-label">.png</label>
+                                </Col>
+                                <Col>
+                                    <input
+                                        type="radio"
+                                        name="imageFormat"
+                                        value="jpg"
+                                        label=".jpg"
+                                        class="form-check-input"
+                                        style={{ marginRight: 5 }}
+                                        checked={this.props.options.output_format === "jpg" ? true : false}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                this.props.options.output_format = "jpg";
+                                                this.props.updateOptions(this.props.options);
+                                            }
+                                        }}
+                                    />
+                                    <label class="form-check-label">.jpg</label>
+                                </Col>
+                                <Col>
+                                    <input
+                                        type="radio"
+                                        name="imageFormat"
+                                        value="hdr"
+                                        label=".hdr"
+                                        class="form-check-input"
+                                        checked={this.props.options.output_format === "hdr" ? true : false}
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                this.props.options.output_format = "hdr";
+                                                this.props.updateOptions(this.props.options);
+                                            }
+                                        }}
+                                    />
+                                    <label class="form-check-label">.hdr</label>
+                                </Col>
                             </Form.Group>
-                            <Form.Group as={Row}>
-                                <Form.Check
-                                    ref={this.transparentRef}
-                                    type="checkbox"
-                                    label={this.props.translations[this.props.language].transparent}
-                                    checked={this.props.options.output_format === "pnga" ? true : false}
-                                    onChange={(e) => {
-                                        this.props.options.output_format = e.target.checked ? "pnga" : "png";
-                                        this.props.updateOptions(this.props.options);
-                                    }}
-                                ></Form.Check>
+                            <Form.Group as={Row} style={{marginLeft: '-25px'}}>
+                                <Col>
+                                    <Form.Check
+                                        ref={this.transparentRef}
+                                        type="checkbox"
+                                        label={this.props.translations[this.props.language].transparent}
+                                        checked={this.props.options.output_format === "pnga" ? true : false}
+                                        onChange={(e) => {
+                                            this.props.options.output_format = e.target.checked ? "pnga" : "png";
+                                            this.props.updateOptions(this.props.options);
+                                        }}
+                                    ></Form.Check>
+                                </Col>
                             </Form.Group>
-                            <Form.Group as={Row} style={{ marginBottom: 5 }}>
+                            <Form.Group as={Row} style={{ marginBottom: 5, marginTop: 10 }}>
                                 <Form.Label style={{ fontWeight: 600 }}>
                                     {this.props.translations[this.props.language].imageSaveLocation}
                                 </Form.Label>
@@ -277,7 +291,7 @@ class Output extends React.Component {
                                 <Form.Control
                                     ref={this.outputDirectoryRef}
                                     size="sm"
-                                    style={{marginRight: 10}}
+                                    style={{ marginRight: 10 }}
                                     disabled={this.props.options.output_mode === "model"}
                                     placeholder="Save location"
                                     onChange={(e) => {
@@ -287,7 +301,7 @@ class Output extends React.Component {
                                     }}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group as={Row} style={{marginRight: -20}}>
+                            <Form.Group as={Row} style={{ marginRight: -20 }}>
                                 <Col>
                                     <Button
                                         variant="light"

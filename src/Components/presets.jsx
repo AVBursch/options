@@ -24,7 +24,8 @@ class Presets extends React.Component {
                             </Form.Label>
                         </Col>
                         <Col xs="9">
-                            <Form.Control as="select"
+                            <select
+                                class="form-select form-select-sm"
                                 defaultValue={this.props.options.preset}
                                 size="sm"
                                 onChange={(e) => {
@@ -40,7 +41,7 @@ class Presets extends React.Component {
                                         )
                                     })
                                 }
-                            </Form.Control>
+                            </select>
                         </Col>
                     </Row>
                     <Form.Group as={Row} style={{marginBottom: 0}}>
