@@ -89,7 +89,7 @@ class Environment extends React.Component {
                                     marginLeft: 0,
                                     marginBottom: 0
                                 }}>
-                                <Form.Label class="col">
+                                <Form.Label class="col w-25">
                                     {this.props.translations[this.props.language].intensity}
                                 </Form.Label>
                                 <Form.Control
@@ -98,7 +98,7 @@ class Environment extends React.Component {
                                     min={0}
                                     max={100} 
                                     class="col"
-                                    style={{ width: 150, marginLeft: 5, marginRight: 5 }}
+                                    style={{ width: '50%', marginLeft: '10px', marginRight: '10px' }}
                                     defaultValue={this.props.options.environment_brightness}
                                     onChange={(e) => {
                                         const value = e.target.value;
@@ -106,7 +106,7 @@ class Environment extends React.Component {
                                         this.props.updateOptions(this.props.options);
                                     }}
                                 ></Form.Control>
-                                <Form.Label style={{ marginLeft: 5 }} class="col">
+                                <Form.Label class="col">
                                     {this.props.options.environment_brightness}
                                 </Form.Label>
                             </Form.Group>
@@ -115,7 +115,7 @@ class Environment extends React.Component {
                                     marginLeft: 0,
                                     marginBottom: 0
                                 }}>
-                                <Form.Label  class="col">
+                                <Form.Label  class="col w-25">
                                     {this.props.translations[this.props.language].exposure}
                                 </Form.Label>
                                 <Form.Control
@@ -124,7 +124,7 @@ class Environment extends React.Component {
                                     min={0}
                                     max={100}
                                     class="col"
-                                    style={{ width: 150, marginLeft: 5, marginRight: 5 }}
+                                    style={{ width: '50%', marginLeft: '10px', marginRight: '10px'  }}
                                     defaultValue={this.props.options.environment_contrast}
                                     onChange={(e) => {
                                         const value = e.target.value;
@@ -140,7 +140,8 @@ class Environment extends React.Component {
                                 style={{
                                     marginLeft: 0,
                                     marginBottom: 0,
-                                    marginRight: -30
+                                    marginRight: -30,
+                                    marginTop: 5
                                 }}>
                                 <Col>
                                     <Button
